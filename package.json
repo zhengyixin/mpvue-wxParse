@@ -1,21 +1,28 @@
 {
-  "name": "wxParse",
+  "name": "mpvue-wxparse",
   "version": "0.3.0",
-  "description": "wxParse-微信小程序富文本解析自定义组件，支持HTML及markdown解析",
-  "homepage": "http://weappdev.com/",
+  "description": "适用于 Mpvue 的微信小程序富文本解析自定义组件，支持HTML及markdown解析",
+  "main": "src/wxParse.vue",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
-    "url": "git@github.com:icindy/wxParse.git"
+    "url": "git+https://github.com/F-loat/mpvue-wxParse.git"
   },
-  "main": "wxParse/wxParse.js",
-  "scripts": {},
   "keywords": [
-    "html",
-    "markdown",
-    "weapp",
-    "weixin",
-    "wxparse-html-markdown"
+    "mpvue",
+    "wxparse",
+    "wxapp"
   ],
-  "devDependencies": {},
-  "dependencies": {}
+  "author": "icindy",
+  "contributors": [
+    "Dicn",
+    "F-loat <chaimaoyuan@foxmail.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/F-loat/mpvue-wxParse/issues"
+  },
+  "homepage": "https://github.com/F-loat/mpvue-wxParse#readme"
 }
