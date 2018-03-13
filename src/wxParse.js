@@ -12,8 +12,8 @@
 /**
  * utils函数引入
  **/
-import showdown from 'showdown';
-import HtmlToJson from 'html2json';
+import showdown from './showdown';
+import HtmlToJson from './html2json';
 /**
  * 配置及公有属性
  **/
