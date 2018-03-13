@@ -2,9 +2,9 @@
  * author: Di (微信小程序开发工程师)
  * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
  *               垂直微信小程序开发交流社区
- * 
+ *
  * github地址: https://github.com/icindy/wxParse
- * 
+ *
  * for: 微信小程序富文本解析
  * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
  */
@@ -12,8 +12,8 @@
 /**
  * utils函数引入
  **/
-import showdown from './showdown.js';
-import HtmlToJson from './html2json.js';
+import showdown from 'showdown';
+import HtmlToJson from 'html2json';
 /**
  * 配置及公有属性
  **/
@@ -28,7 +28,12 @@ wx.getSystemInfo({
 /**
  * 主函数入口区
  **/
-function wxParse(bindName = 'wxParseData', type='html', data='<div class="color:red;">数据不能为空</div>', target,imagePadding) {
+export const wxParse = (
+  bindName = 'wxParseData',
+  type = 'html',
+  data = '<div class="color:red;">数据不能为空</div>',
+  target,
+  imagePadding) => {
   var that = target;
   var transData = {};//存放转化后的数据
   if (type == 'html') {
@@ -45,11 +50,9 @@ function wxParse(bindName = 'wxParseData', type='html', data='<div class="color:
   if(typeof(imagePadding) != 'undefined'){
     transData.view.imagePadding = imagePadding
   }
-  var bindData = {};
-  bindData[bindName] = transData;
-  that.setData(bindData)
   that.wxParseImgLoad = wxParseImgLoad;
   that.wxParseImgTap = wxParseImgTap;
+  return transData
 }
 // 图片点击事件
 function wxParseImgTap(e) {
@@ -65,7 +68,7 @@ function wxParseImgTap(e) {
 }
 
 /**
- * 图片视觉宽高计算函数区 
+ * 图片视觉宽高计算函数区
  **/
 function wxParseImgLoad(e) {
   var that = this;
@@ -73,7 +76,7 @@ function wxParseImgLoad(e) {
   var idx = e.target.dataset.idx;
   if (typeof (tagFrom) != 'undefined' && tagFrom.length > 0) {
     calMoreImageInfo(e, idx, that, tagFrom)
-  } 
+  }
 }
 // 假循环获取计算图片视觉最佳宽高
 function calMoreImageInfo(e, idx, that, bindName) {
@@ -83,9 +86,9 @@ function calMoreImageInfo(e, idx, that, bindName) {
   }
   var temImages = temData.images;
   //因为无法获取view宽度 需要自定义padding进行计算，稍后处理
-  var recal = wxAutoImageCal(e.detail.width, e.detail.height,that,bindName); 
+  var recal = wxAutoImageCal(e.detail.width, e.detail.height,that,bindName);
   // temImages[idx].width = recal.imageWidth;
-  // temImages[idx].height = recal.imageheight; 
+  // temImages[idx].height = recal.imageheight;
   // temData.images = temImages;
   // var bindData = {};
   // bindData[bindName] = temData;
@@ -126,7 +129,7 @@ function wxAutoImageCal(originalWidth, originalHeight,that,bindName) {
   return results;
 }
 
-function wxParseTemArray(temArrayName,bindNameReg,total,that){
+export const wxParseTemArray = (temArrayName, bindNameReg, total, that) => {
   var array = [];
   var temData = that.data;
   var obj = null;
@@ -143,17 +146,9 @@ function wxParseTemArray(temArrayName,bindNameReg,total,that){
 
 /**
  * 配置emojis
- * 
+ *
  */
 
-function emojisInit(reg='',baseSrc="/wxParse/emojis/",emojis){
+export const emojisInit = (reg = '', baseSrc = '/wxParse/emojis/', emojis) => {
    HtmlToJson.emojisInit(reg,baseSrc,emojis);
 }
-
-module.exports = {
-  wxParse: wxParse,
-  wxParseTemArray:wxParseTemArray,
-  emojisInit:emojisInit
-}
-
-
