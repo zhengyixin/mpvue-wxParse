@@ -43,6 +43,13 @@
         </block>
       </view>
     </block>
+    <block v-else-if="node.tag == 'table'">
+      <view :class="node.classStr" class="wxParse-table" :style="node.styleStr">
+        <block v-for="node of node.nodes" :key="node.index">
+          <wx-parse-template :node="node" />
+        </block>
+      </view>
+    </block>
 
     <block v-else-if="node.tag == 'br'">
       <wx-parse-br />
@@ -73,14 +80,14 @@
 </template>
 
 <script>
-import wxParseTemplate from './wxParseTemplate2'
+import wxParseTemplate from './wxParseTemplate0'
 import wxEmojiView from './wxEmojiView'
 import wxParseBr from './wxParseBr'
 import wxParseImg from './wxParseImg'
 import wxParseVideo from './wxParseVideo'
 
 export default {
-  name: 'WxEmojiView',
+  name: 'wxParseTemplate',
   props: {
     node: {}
   },

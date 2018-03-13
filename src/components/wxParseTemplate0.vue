@@ -87,7 +87,7 @@ import wxParseImg from './wxParseImg'
 import wxParseVideo from './wxParseVideo'
 
 export default {
-  name: 'WxEmojiView',
+  name: 'wxParseTemplate',
   props: {
     node: {}
   },
