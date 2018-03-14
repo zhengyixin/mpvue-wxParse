@@ -64,7 +64,7 @@
     </block>
 
     <!--内联标签-->
-    <view wx:else :class="node.classStr" class="wxParse-span wxParse-inline" :style="node.styleStr">
+    <view v-else :class="node.classStr" class="wxParse-span wxParse-inline" :style="node.styleStr">
       <block v-for="node of node.nodes" :key="node.index">
         <wx-parse-template :node="node" />
       </block>
@@ -87,7 +87,7 @@ import wxParseImg from './wxParseImg'
 import wxParseVideo from './wxParseVideo'
 
 export default {
-  name: 'wxParseTemplate',
+  name: 'wxParseTemplate0',
   props: {
     node: {}
   },

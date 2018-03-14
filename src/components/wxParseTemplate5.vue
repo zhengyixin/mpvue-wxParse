@@ -1,4 +1,4 @@
-<template>
+s<template>
   <!--判断是否是标签节点-->
   <block v-if="node.node == 'element'">
     <block v-if="node.tag == 'button'">
@@ -73,14 +73,14 @@
 </template>
 
 <script>
-import wxParseTemplate from './wxParseTemplate2'
+import wxParseTemplate from './wxParseTemplate6'
 import wxEmojiView from './wxEmojiView'
 import wxParseBr from './wxParseBr'
 import wxParseImg from './wxParseImg'
 import wxParseVideo from './wxParseVideo'
 
 export default {
-  name: 'wxParseTemplate1',
+  name: 'wxParseTemplate5',
   props: {
     node: {}
   },

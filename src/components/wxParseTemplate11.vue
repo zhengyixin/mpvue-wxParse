@@ -1,11 +1,9 @@
 <template>
   <!--判断是否是标签节点-->
   <block v-if="node.node == 'element'">
+    <!--button类型-->
     <block v-if="node.tag == 'button'">
       <button type="default" size="mini">
-        <block v-for="node of node.nodes" :key="node.index">
-          <wx-parse-template :node="node" />
-        </block>
       </button>
     </block>
 
@@ -17,9 +15,7 @@
             <view :class="node.classStr" class="wxParse-li-circle"></view>
           </view>
           <view :class="node.classStr" class="wxParse-li-text">
-            <block v-for="node of node.nodes" :key="node.index">
-              <wx-parse-template :node="node" />
-            </block>
+            {{node.text}}
           </view>
         </view>
       </view>
@@ -38,29 +34,24 @@
     <!--a类型-->
     <block v-else-if="node.tag == 'a'">
       <view bindtap="wxParseTagATap" :class="node.classStr" class="wxParse-inline wxParse-a" data-src="node.attr.href" :style="node.styleStr">
-        <block v-for="node of node.nodes" :key="node.index">
-          <wx-parse-template :node="node" />
-        </block>
+        {{node.text}}
       </view>
     </block>
 
     <block v-else-if="node.tag == 'br'">
       <wx-parse-br />
     </block>
+
     <!--其他块级标签-->
     <block v-else-if="node.tagType == 'block'">
       <view :class="node.classStr" class="wxParse-block" :style="node.styleStr">
-        <block v-for="node of node.nodes" :key="node.index">
-          <wx-parse-template :node="node" />
-        </block>
+        {{node.text}}
       </view>
     </block>
 
     <!--内联标签-->
     <view v-else :class="node.classStr" class="wxParse-span wxParse-inline" :style="node.styleStr">
-      <block v-for="node of node.nodes" :key="node.index">
-        <wx-parse-template :node="node" />
-      </block>
+      {{node.text}}
     </view>
 
   </block>
@@ -73,19 +64,17 @@
 </template>
 
 <script>
-import wxParseTemplate from './wxParseTemplate2'
 import wxEmojiView from './wxEmojiView'
 import wxParseBr from './wxParseBr'
 import wxParseImg from './wxParseImg'
 import wxParseVideo from './wxParseVideo'
 
 export default {
-  name: 'wxParseTemplate1',
+  name: 'wxParseTemplate11',
   props: {
     node: {}
   },
   components: {
-    wxParseTemplate,
     wxEmojiView,
     wxParseBr,
     wxParseImg,

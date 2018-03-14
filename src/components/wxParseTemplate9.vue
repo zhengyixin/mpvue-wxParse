@@ -73,14 +73,14 @@
 </template>
 
 <script>
-import wxParseTemplate from './wxParseTemplate2'
+import wxParseTemplate from './wxParseTemplate10'
 import wxEmojiView from './wxEmojiView'
 import wxParseBr from './wxParseBr'
 import wxParseImg from './wxParseImg'
 import wxParseVideo from './wxParseVideo'
 
 export default {
-  name: 'wxParseTemplate1',
+  name: 'wxParseTemplate9',
   props: {
     node: {}
   },
