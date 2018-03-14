@@ -1,6 +1,6 @@
 # mpvue-wxParse 适用于 Mpvue 的微信小程序富文本解析组件</h1>
 
-> 支持 Html 及 markdown 转 wxml 可视化，修改自: [微信小程序开发论坛-weappdev](https://weappdev.com)
+> 支持 Html 及 markdown 转 wxml 可视化，修改自: [wxParse](https://github.com/icindy/wxParse)
 
 [![npm package](https://img.shields.io/npm/v/mpvue-wxparse.svg)](https://npmjs.org/package/mpvue-wxparse)
 [![npm downloads](http://img.shields.io/npm/dm/mpvue-wxparse.svg)](https://npmjs.org/package/mpvue-wxparse)
@@ -52,6 +52,31 @@ export default {
 </script>
 ```
 
+## 常见问题
+
+* 打包时出错 `ERROR in static/js/vendor.js from UglifyJs`
+
+参照以下配置使 babel 处理 mpvue-wxparse，或直接关闭 UglifyJs 插件
+``` js
+// webpack.base.conf.js
+{
+  test: /\.js$/,
+  include: [
+    resolve('src'),
+    resolve('node_modules/mpvue-wxparse')
+  ],
+  use: [
+    'babel-loader',
+    {
+      loader: 'mpvue-loader',
+      options: {
+        checkMPEntry: true
+      }
+    }
+  ]
+}
+```
+
 
 ## 相关截图
 
@@ -60,4 +85,4 @@ export default {
 
 ## 感谢
 
-[@stonewen](https://github.com/stonewen)| [@Daissmentii](https://github.com/Daissmentii)        | [@wuyanwen](https://github.com/wuyanwen)           | [@vcxiaohan](https://github.com/vcxiaohan)  |
+[@stonewen](https://github.com/stonewen)| [@Daissmentii](https://github.com/Daissmentii)        | [@wuyanwen](https://github.com/wuyanwen)           | [@vcxiaohan](https://github.com/vcxiaohan)
