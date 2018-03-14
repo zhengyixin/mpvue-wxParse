@@ -1,7 +1,7 @@
 <template>
-  <view class="WxEmojiView wxParse-inline" :style="node.styleStr">
+  <view class="wxParseText wxParse-inline" :style="node.styleStr">
     <block v-for="node of node.textArray" :key="node.index">
-      <text v-if="node.node == 'text'">{{node.text}}</text>
+      <block v-if="node.node == 'text'">{{node.text}}</block>
       <block v-else-if="node.node == 'element'">
         <image :class="wxEmoji" :src="node.baseSrcnode.text" />
       </block>
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'WxEmojiView',
+  name: 'wxParseText',
   props: {
     node: {}
   }

@@ -68,13 +68,13 @@
   <!--判断是否是文本节点-->
   <block v-else-if="node.node == 'text'">
     <!--如果是，直接进行-->
-    <wx-emoji-view :node="node" />
+    <wx-parse-text :node="node" />
   </block>
 </template>
 
 <script>
 import wxParseTemplate from './wxParseTemplate2'
-import wxEmojiView from './wxEmojiView'
+import wxParseText from './wxParseText'
 import wxParseBr from './wxParseBr'
 import wxParseImg from './wxParseImg'
 import wxParseVideo from './wxParseVideo'
@@ -86,7 +86,7 @@ export default {
   },
   components: {
     wxParseTemplate,
-    wxEmojiView,
+    wxParseText,
     wxParseBr,
     wxParseImg,
     wxParseVideo
