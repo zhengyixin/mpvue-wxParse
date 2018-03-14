@@ -11,12 +11,12 @@ s<template>
 
     <!--li类型-->
     <block v-else-if="node.tag == 'li'">
-      <view :class="node.classStr" class="wxParse-li" :style="node.styleStr">
-        <view :class="node.classStr" class="wxParse-li-inner">
-          <view :class="node.classStr" class="wxParse-li-text">
-            <view :class="node.classStr" class="wxParse-li-circle"></view>
+      <view :class="node.classStr" class="li" :style="node.styleStr">
+        <view :class="node.classStr" class="li-inner">
+          <view :class="node.classStr" class="li-text">
+            <view :class="node.classStr" class="li-circle"></view>
           </view>
-          <view :class="node.classStr" class="wxParse-li-text">
+          <view :class="node.classStr" class="li-text">
             <block v-for="node of node.nodes" :key="node.index">
               <wx-parse-template :node="node" />
             </block>
@@ -37,19 +37,21 @@ s<template>
 
     <!--a类型-->
     <block v-else-if="node.tag == 'a'">
-      <view bindtap="wxParseTagATap" :class="node.classStr" class="wxParse-inline wxParse-a" data-src="node.attr.href" :style="node.styleStr">
+      <view bindtap="wxParseTagATap" :class="node.classStr" class="inline a" data-src="node.attr.href" :style="node.styleStr">
         <block v-for="node of node.nodes" :key="node.index">
           <wx-parse-template :node="node" />
         </block>
       </view>
     </block>
 
+    <!--br类型-->
     <block v-else-if="node.tag == 'br'">
-      <wx-parse-br />
+      <text>\n</text>
     </block>
+
     <!--其他块级标签-->
     <block v-else-if="node.tagType == 'block'">
-      <view :class="node.classStr" class="wxParse-block" :style="node.styleStr">
+      <view :class="[node.classStr, node.tag]" :style="node.styleStr">
         <block v-for="node of node.nodes" :key="node.index">
           <wx-parse-template :node="node" />
         </block>
@@ -57,7 +59,7 @@ s<template>
     </block>
 
     <!--内联标签-->
-    <view v-else :class="node.classStr" class="wxParse-span wxParse-inline" :style="node.styleStr">
+    <view v-else :class="[node.classStr, node.tag]" class="inline" :style="node.styleStr">
       <block v-for="node of node.nodes" :key="node.index">
         <wx-parse-template :node="node" />
       </block>
@@ -75,7 +77,6 @@ s<template>
 <script>
 import wxParseTemplate from './wxParseTemplate6'
 import wxParseText from './wxParseText'
-import wxParseBr from './wxParseBr'
 import wxParseImg from './wxParseImg'
 import wxParseVideo from './wxParseVideo'
 
@@ -87,7 +88,6 @@ export default {
   components: {
     wxParseTemplate,
     wxParseText,
-    wxParseBr,
     wxParseImg,
     wxParseVideo
   }

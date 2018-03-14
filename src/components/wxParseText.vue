@@ -1,5 +1,5 @@
 <template>
-  <view class="wxParseText wxParse-inline" :style="node.styleStr">
+  <view class="wxParseText inline" :style="node.styleStr">
     <block v-for="node of node.textArray" :key="node.index">
       <block v-if="node.node == 'text'">{{node.text}}</block>
       <block v-else-if="node.node == 'element'">

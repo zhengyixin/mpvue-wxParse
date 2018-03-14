@@ -1,6 +1,6 @@
 <template>
   <image
-    class="wxParse-img"
+    class="img"
     mode="aspectFit"
     :class="node.classStr"
     :style="node.styleStr"

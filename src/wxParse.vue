@@ -8,7 +8,7 @@
 
 <template>
 <!--基础元素-->
-<div>
+<div class="wxParse">
   <block v-for="node of wxParseData.nodes" :key="node.index">
     <wxParseTemplate :node="node" />
   </block>
