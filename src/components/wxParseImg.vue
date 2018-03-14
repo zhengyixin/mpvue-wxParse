@@ -1,5 +1,12 @@
 <template>
-  <image :class="node.classStr" class="wxParse-img" data-from="node.from" data-src="node.attr.src" data-idx="node.imgIndex" :src="node.attr.src" mode="aspectFit" bindload="wxParseImgLoad" bindtap="wxParseImgTap" :style="node.styleStr"
+  <image
+    class="wxParse-img"
+    mode="aspectFit"
+    :class="node.classStr"
+    :style="node.styleStr"
+    :data-src="node.attr.src"
+    :src="node.attr.src"
+    @tap="wxParseImgTap"
     />
 </template>
 
@@ -8,6 +15,14 @@ export default {
   name: 'wxParseImg',
   props: {
     node: {}
+  },
+  methods: {
+    wxParseImgTap(e) {
+      wx.previewImage({
+        current: e.target.dataset.src, // 当前显示图片的http链接
+        urls: this.$root.$children[0].wxParseData.imageUrls // 需要预览的图片http链接列表
+      })
+    }
   }
 }
 </script>

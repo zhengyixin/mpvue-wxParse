@@ -21,16 +21,37 @@ import wxParseTemplate from './components/wxParseTemplate0'
 
 export default {
   props: {
-    type: 'html',
-    content: '',
-    imagePadding: 0
+    type: {
+      type: String,
+      default() {
+        return 'html'
+      }
+    },
+    content: {
+      type: String,
+      default() {
+        return '<div class="color:red;">数据不能为空</div>'
+      }
+    },
+    imagePadding: {
+      type: Number,
+      default() {
+        return 0
+      }
+    },
+    debug: {
+      type: Boolean,
+      default() {
+        return false
+      }
+    }
   },
   components: {
     wxParseTemplate
   },
   computed: {
     wxParseData() {
-      return wxParse('content', this.type, this.content, this, this.imagePadding)
+      return wxParse(this.type, this.content, this.imagePadding)
     }
   }
 }
