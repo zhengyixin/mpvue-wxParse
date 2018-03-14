@@ -20,16 +20,16 @@ import HtmlToJson from './libs/html2json';
 var realWindowWidth = 0;
 var realWindowHeight = 0;
 wx.getSystemInfo({
-  success: function (res) {
-    realWindowWidth = res.windowWidth
-    realWindowHeight = res.windowHeight
+  success: function(res) {
+    realWindowWidth = res.windowWidth;
+    realWindowHeight = res.windowHeight;
   }
-})
+});
 /**
  * 主函数入口区
  **/
 export const wxParse = (type, data, imagePadding, DEBUG) => {
-  var transData = {};//存放转化后的数据
+  var transData = {}; //存放转化后的数据
   if (type == 'html') {
     transData = HtmlToJson.html2json(data, 'content');
     if (DEBUG) console.log(JSON.stringify(transData, ' ', ' '));
@@ -41,11 +41,11 @@ export const wxParse = (type, data, imagePadding, DEBUG) => {
   }
   transData.view = {};
   transData.view.imagePadding = 0;
-  if (typeof (imagePadding) != 'undefined') {
-    transData.view.imagePadding = imagePadding
+  if (typeof imagePadding != 'undefined') {
+    transData.view.imagePadding = imagePadding;
   }
-  return transData
-}
+  return transData;
+};
 
 export const wxParseTemArray = (temArrayName, bindNameReg, total, that) => {
   var array = [];
@@ -60,7 +60,7 @@ export const wxParseTemArray = (temArrayName, bindNameReg, total, that) => {
   obj = JSON.parse('{"' + temArrayName + '":""}');
   obj[temArrayName] = array;
   that.setData(obj);
-}
+};
 
 /**
  * 配置emojis
@@ -69,4 +69,4 @@ export const wxParseTemArray = (temArrayName, bindNameReg, total, that) => {
 
 export const emojisInit = (reg = '', baseSrc = '/wxParse/emojis/', emojis) => {
   HtmlToJson.emojisInit(reg, baseSrc, emojis);
-}
+};
