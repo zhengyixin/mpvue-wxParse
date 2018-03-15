@@ -182,6 +182,7 @@ view {
 }
 
 .wxParse .li-text {
+  display: flex;
   align-items: center;
   line-height: 20px;
 }
@@ -192,6 +193,9 @@ view {
   height: 5px;
   background-color: #333;
   margin-right: 5px;
+  border-radius: 50%;
+  position: relative;
+  top: -2.5px;
 }
 
 .wxParse .li-square {
