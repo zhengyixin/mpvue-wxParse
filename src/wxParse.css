@@ -235,10 +235,6 @@ view {
 .wxParseText {
   align-items: center;
 }
-.wxEmoji {
-  width: 16px;
-  height: 16px;
-}
 .wxParse .tr {
   display: flex;
   border-right: 1px solid #e0e0e0;

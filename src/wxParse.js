@@ -19,7 +19,7 @@ import HtmlToJson from './libs/html2json';
  **/
 export const wxParse = (data, imagePadding, DEBUG) => {
   var transData = {}; //存放转化后的数据
-    transData = HtmlToJson.html2json(data, 'content');
+    transData = HtmlToJson(data, 'content');
     if (DEBUG) console.log(JSON.stringify(transData, ' ', ' '));
   transData.view = {};
   transData.view.imagePadding = 0;
@@ -27,12 +27,4 @@ export const wxParse = (data, imagePadding, DEBUG) => {
     transData.view.imagePadding = imagePadding;
   }
   return transData;
-};
-
-/**
- * 配置emojis
- *
- */
-export const emojisInit = (reg = '', baseSrc = '/wxParse/emojis/', emojis) => {
-  HtmlToJson.emojisInit(reg, baseSrc, emojis);
 };

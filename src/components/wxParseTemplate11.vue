@@ -59,13 +59,13 @@
 
   <!--判断是否是文本节点-->
   <block v-else-if="node.node == 'text'">
-    <!--如果是，直接进行-->
-    <wx-parse-text :node="node" />
+    <view class="wxParseText inline" :style="node.styleStr">
+      {{node.text}}
+    </view>
   </block>
 </template>
 
 <script>
-import wxParseText from './wxParseText'
 import wxParseImg from './wxParseImg'
 import wxParseVideo from './wxParseVideo'
 
@@ -75,7 +75,6 @@ export default {
     node: {}
   },
   components: {
-    wxParseText,
     wxParseImg,
     wxParseVideo
   }
