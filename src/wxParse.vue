@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { wxParse } from './wxParse'
+import HtmlToJson from './libs/html2json';
 import wxParseTemplate from './components/wxParseTemplate0'
 
 export default {
@@ -51,7 +51,12 @@ export default {
   },
   computed: {
     wxParseData() {
-      return wxParse(this.content, this.imagePadding, this.debug)
+      const transData = HtmlToJson(this.content, 'content');
+      if (this.debug) console.log(JSON.stringify(transData, ' ', ' '));
+      transData.view = {
+        imagePadding: this.imagePadding
+      };
+      return transData;
     }
   }
 }
