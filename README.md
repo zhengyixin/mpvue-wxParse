@@ -52,6 +52,17 @@ export default {
 </script>
 ```
 
+
+## 属性
+
+| 名称              | 类型           | 默认值        | 描述           |
+| -----------------|--------------- | ------------- | ------------- |
+| content          | String         | 数据不能为空   | 渲染内容       |
+| imageMode        | String         | aspectFit     | 图片缩放模式   |
+| imagePadding     | Number         | 0             | 图片边距       |
+| debug            | Boolean        | false         | 调试开关       |
+
+
 ## 常见问题
 
 * 打包时出错 `ERROR in static/js/vendor.js from UglifyJs`
