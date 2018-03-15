@@ -21,16 +21,16 @@ import wxParseTemplate from './components/wxParseTemplate0'
 
 export default {
   props: {
-    type: {
-      type: String,
-      default() {
-        return 'html'
-      }
-    },
     content: {
       type: String,
       default() {
         return '<div class="color:red;">数据不能为空</div>'
+      }
+    },
+    imageMode: {
+      type: String,
+      default() {
+        return 'aspectFit'
       }
     },
     imagePadding: {
@@ -51,7 +51,7 @@ export default {
   },
   computed: {
     wxParseData() {
-      return wxParse(this.type, this.content, this.imagePadding)
+      return wxParse(this.content, this.imagePadding, this.debug)
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <image
     class="img"
-    mode="aspectFit"
+    :mode="mode"
     :class="node.classStr"
     :style="node.styleStr"
     :data-src="node.attr.src"
@@ -15,6 +15,11 @@ export default {
   name: 'wxParseImg',
   props: {
     node: {}
+  },
+  computed: {
+    mode() {
+      return this.$root.$children[0].imageMode
+    }
   },
   methods: {
     wxParseImgTap(e) {
