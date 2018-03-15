@@ -1,6 +1,6 @@
 # mpvue-wxParse 适用于 Mpvue 的微信小程序富文本解析组件</h1>
 
-> 支持 Html 及 markdown 转 wxml 可视化，修改自: [wxParse](https://github.com/icindy/wxParse)
+> 支持 Html 转 wxml 可视化，修改自: [wxParse](https://github.com/icindy/wxParse)
 
 [![npm package](https://img.shields.io/npm/v/mpvue-wxparse.svg)](https://npmjs.org/package/mpvue-wxparse)
 [![npm downloads](http://img.shields.io/npm/dm/mpvue-wxparse.svg)](https://npmjs.org/package/mpvue-wxparse)
@@ -76,11 +76,6 @@ export default {
   ]
 }
 ```
-
-
-## 相关截图
-
-![相关截图](screenshoot/screen.jpg)
 
 
 ## 感谢
