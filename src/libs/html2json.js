@@ -66,7 +66,7 @@ function trimHtml(html) {
     .replace(/[ ]+</gi, '<');
 }
 
-function html2json(html, bindName) {
+function html2json(html, imageMode) {
   //处理字符串
   html = removeDOCTYPE(html);
   html = trimHtml(html);
@@ -74,7 +74,6 @@ function html2json(html, bindName) {
   //生成node节点
   var bufArray = [];
   var results = {
-    node: bindName,
     nodes: [],
     images: [],
     imageUrls: []
@@ -156,7 +155,8 @@ function html2json(html, bindName) {
         }
         imgUrl = wxDiscode.urlToHttpUrl(imgUrl, __placeImgeUrlHttps);
         node.attr.src = imgUrl;
-        node.from = bindName;
+        node.imageMode = imageMode;
+        node.imageUrls = results.imageUrls;
         results.images.push(node);
         results.imageUrls.push(imgUrl);
       }
