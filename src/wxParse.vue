@@ -20,6 +20,7 @@ import HtmlToJson from './libs/html2json';
 import wxParseTemplate from './components/wxParseTemplate0'
 
 export default {
+  name: 'wxParse',
   props: {
     content: {
       type: String,

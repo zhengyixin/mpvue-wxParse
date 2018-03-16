@@ -1,7 +1,7 @@
 <template>
   <image
     class="img"
-    :mode="mode"
+    :mode="image.mode"
     :class="node.classStr"
     :style="node.styleStr"
     :data-src="node.attr.src"
@@ -17,15 +17,19 @@ export default {
     node: {}
   },
   computed: {
-    mode() {
-      return this.$root.$children[0].imageMode
+    image() {
+      const $wxParse = this.$root.$children.find(child => child.imageMode)
+      return {
+        mode: $wxParse.imageMode,
+        urls: $wxParse.imageUrls
+      }
     }
   },
   methods: {
     wxParseImgTap(e) {
       wx.previewImage({
         current: e.target.dataset.src, // 当前显示图片的http链接
-        urls: this.$root.$children[0].wxParseData.imageUrls // 需要预览的图片http链接列表
+        urls: this.image.urls // 需要预览的图片http链接列表
       })
     }
   }
