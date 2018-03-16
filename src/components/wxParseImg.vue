@@ -18,7 +18,7 @@ export default {
   },
   computed: {
     image() {
-      const $wxParse = this.$root.$children.find(child => child.imageMode)
+      const $wxParse = this.$root.$children.find(child => child.imageMode) || {}
       return {
         mode: $wxParse.imageMode,
         urls: $wxParse.imageUrls
