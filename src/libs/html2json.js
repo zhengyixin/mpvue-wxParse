@@ -39,7 +39,7 @@ var fillAttrs = makeMap(
 );
 
 // Special Elements (can contain anything)
-var special = makeMap('wxxxcode-style,script,style,view,scroll-view,block');
+var special = makeMap('script,style,view,scroll-view,block');
 function makeMap(str) {
   var obj = {},
     items = str.split(',');
