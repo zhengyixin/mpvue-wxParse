@@ -50,7 +50,7 @@ s<template>
     </block>
 
     <!--其他块级标签-->
-    <block v-else-if="node.tagType == 'block'">
+    <block v-else-if="node.tagType == 'block' && node.tag !== 'script'">
       <view :class="[node.classStr, node.tag]" :style="node.styleStr">
         <block v-for="node of node.nodes" :key="node.index">
           <wx-parse-template :node="node" />
@@ -59,7 +59,7 @@ s<template>
     </block>
 
     <!--内联标签-->
-    <view v-else :class="[node.classStr, node.tag]" class="inline" :style="node.styleStr">
+    <view v-else-if="node.tagType == 'inline' && node.tag !== 'style'" :class="[node.classStr, node.tag]" class="inline" :style="node.styleStr">
       <block v-for="node of node.nodes" :key="node.index">
         <wx-parse-template :node="node" />
       </block>
