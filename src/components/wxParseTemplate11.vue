@@ -33,7 +33,7 @@
 
     <!--a类型-->
     <block v-else-if="node.tag == 'a'">
-      <view bindtap="wxParseTagATap" :class="node.classStr" class="inline a" data-src="node.attr.href" :style="node.styleStr">
+      <view :class="node.classStr" class="inline a" data-href="node.attr.href" :style="node.styleStr">
         {{node.text}}
       </view>
     </block>
