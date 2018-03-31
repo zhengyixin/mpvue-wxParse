@@ -43,6 +43,8 @@
         </block>
       </view>
     </block>
+
+    <!--table类型-->
     <block v-else-if="node.tag == 'table'">
       <view :class="node.classStr" class="table" :style="node.styleStr">
         <block v-for="node of node.nodes" :key="node.index">
@@ -76,9 +78,7 @@
 
   <!--判断是否是文本节点-->
   <block v-else-if="node.node == 'text'">
-    <view class="wxParseText inline" :style="node.styleStr">
-      {{node.text}}
-    </view>
+    {{node.text}}
   </block>
 </template>
 

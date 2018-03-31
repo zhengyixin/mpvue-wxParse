@@ -59,9 +59,7 @@
 
   <!--判断是否是文本节点-->
   <block v-else-if="node.node == 'text'">
-    <view class="wxParseText inline" :style="node.styleStr">
-      {{node.text}}
-    </view>
+    {{node.text}}
   </block>
 </template>
 
