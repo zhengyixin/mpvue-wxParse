@@ -110,7 +110,9 @@ view {
   font-family: monospace;
 }
 .wxParse .pre {
-  white-space: pre;
+  background: #f5f5f5;
+  padding: 8px;
+  white-space: pre-wrap;
 }
 .wxParse .big {
   font-size: 1.17em;

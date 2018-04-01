@@ -52,11 +52,10 @@ export default {
   },
   computed: {
     wxParseData() {
-      const transData = HtmlToJson(this.content, this.imageMode);
-      if (this.debug) console.log(JSON.stringify(transData, ' ', ' '));
-      transData.view = {
-        imagePadding: this.imagePadding
-      };
+      const { content, imageMode, imagePadding, debug } = this
+      const transData = HtmlToJson(content.replace(/\n/g, '<p>'), imageMode);
+      if (debug) console.log(JSON.stringify(transData, ' ', ' '));
+      transData.view = { imagePadding };
       return transData;
     }
   }
