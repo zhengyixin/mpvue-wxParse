@@ -18,8 +18,10 @@ export default {
   },
   methods: {
     wxParseImgTap(e) {
+      const { src } = e.target.dataset
+      if (!src) return
       wx.previewImage({
-        current: e.target.dataset.src, // 当前显示图片的http链接
+        current: src, // 当前显示图片的http链接
         urls: this.node.imageUrls // 需要预览的图片http链接列表
       })
     }

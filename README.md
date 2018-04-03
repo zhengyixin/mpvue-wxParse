@@ -1,4 +1,4 @@
-# mpvue-wxParse 适用于 Mpvue 的微信小程序富文本解析组件</h1>
+# mpvue-wxParse 适用于 Mpvue 的微信小程序富文本解析组件
 
 > 支持 Html 转 wxml 可视化，修改自: [wxParse](https://github.com/icindy/wxParse)
 

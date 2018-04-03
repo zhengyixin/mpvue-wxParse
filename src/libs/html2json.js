@@ -107,58 +107,60 @@ function html2json(html, imageMode) {
         node.tagType = 'closeSelf';
       }
 
-      if (attrs.length !== 0) {
-        node.attr = attrs.reduce(function(pre, attr) {
-          var name = attr.name;
-          var value = attr.value;
-          if (name == 'class') {
-            console.dir(value);
-            //  value = value.join("")
-            node.classStr = value;
-          }
-          // has multi attibutes
-          // make it array of attribute
-          if (name == 'style') {
-            console.dir(value);
-            //  value = value.join("")
-            node.styleStr = value;
-          }
-          if (value.match(/ /)) {
-            value = value.split(' ');
-          }
+      node.attr = attrs.reduce(function(pre, attr) {
+        var name = attr.name;
+        var value = attr.value;
+        if (name == 'class') {
+          console.dir(value);
+          //  value = value.join("")
+          node.classStr = value;
+        }
+        // has multi attibutes
+        // make it array of attribute
+        if (name == 'style') {
+          console.dir(value);
+          //  value = value.join("")
+          node.styleStr = value;
+        }
+        if (value.match(/ /)) {
+          value = value.split(' ');
+        }
 
-          // if attr already exists
-          // merge it
-          if (pre[name]) {
-            if (Array.isArray(pre[name])) {
-              // already array, push to last
-              pre[name].push(value);
-            } else {
-              // single value, make it array
-              pre[name] = [pre[name], value];
-            }
+        // if attr already exists
+        // merge it
+        if (pre[name]) {
+          if (Array.isArray(pre[name])) {
+            // already array, push to last
+            pre[name].push(value);
           } else {
-            // not exist, put it
-            pre[name] = value;
+            // single value, make it array
+            pre[name] = [pre[name], value];
           }
+        } else {
+          // not exist, put it
+          pre[name] = value;
+        }
 
-          return pre;
-        }, {});
-      }
+        return pre;
+      }, {});
 
-      //对img添加额外数据
+      // 对img添加额外数据
       if (node.tag === 'img') {
         node.imgIndex = results.images.length;
         var imgUrl = node.attr.src;
-        if (imgUrl[0] == '') {
-          imgUrl.splice(0, 1);
-        }
         imgUrl = wxDiscode.urlToHttpUrl(imgUrl, __placeImgeUrlHttps);
-        node.attr.src = imgUrl;
+        node.attr.src = imgUrl || '';
         node.imageMode = imageMode;
         node.imageUrls = results.imageUrls;
-        results.images.push(node);
-        results.imageUrls.push(imgUrl);
+        if (imgUrl) {
+          results.images.push(node);
+          results.imageUrls.push(imgUrl);
+        }
+      }
+
+      // 处理a标签属性
+      if (node.tag === 'a') {
+        node.attr.href = node.attr.href || ''
       }
 
       // 处理font标签样式属性
