@@ -2,7 +2,7 @@
 function strNumDiscode(str) {
   str = str.replace(/&forall;/g, '∀');
   str = str.replace(/&part;/g, '∂');
-  str = str.replace(/&exists;/g, '∃');
+  str = str.replace(/&exist;/g, '∃');
   str = str.replace(/&empty;/g, '∅');
   str = str.replace(/&nabla;/g, '∇');
   str = str.replace(/&isin;/g, '∈');
@@ -19,7 +19,7 @@ function strNumDiscode(str) {
   str = str.replace(/&and;/g, '∧');
   str = str.replace(/&or;/g, '∨');
   str = str.replace(/&cap;/g, '∩');
-  str = str.replace(/&cap;/g, '∪');
+  str = str.replace(/&cup;/g, '∪');
   str = str.replace(/&int;/g, '∫');
   str = str.replace(/&there4;/g, '∴');
   str = str.replace(/&sim;/g, '∼');
@@ -175,19 +175,11 @@ function strOtherDiscode(str) {
   return str;
 }
 
-function strMoreDiscode(str) {
-  str = str.replace(/\r\n/g, '');
-  str = str.replace(/\n/g, '');
-
-  return str;
-}
-
 function strDiscode(str) {
   str = strNumDiscode(str);
   str = strGreeceDiscode(str);
   str = strcharacterDiscode(str);
   str = strOtherDiscode(str);
-  str = strMoreDiscode(str);
   return str;
 }
 function urlToHttpUrl(url, rep) {

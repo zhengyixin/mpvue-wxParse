@@ -60,7 +60,6 @@ function removeDOCTYPE(html) {
 
 function trimHtml(html) {
   return html
-    .replace(/\r?\n+/g, '')
     .replace(/<!--.*?-->/gi, '')
     .replace(/\/\*.*?\*\//gi, '')
     .replace(/[ ]+</gi, '<');
@@ -80,7 +79,7 @@ function html2json(html, imageMode) {
   };
   var index = 0;
   HTMLParser(html, {
-    start: function(tag, attrs, unary) {
+    start: function (tag, attrs, unary) {
       //debug(tag, attrs, unary);
       // node for this element
       var node = {
@@ -107,7 +106,7 @@ function html2json(html, imageMode) {
         node.tagType = 'closeSelf';
       }
 
-      node.attr = attrs.reduce(function(pre, attr) {
+      node.attr = attrs.reduce(function (pre, attr) {
         var name = attr.name;
         var value = attr.value;
         if (name == 'class') {
@@ -163,6 +162,7 @@ function html2json(html, imageMode) {
         node.attr.href = node.attr.href || ''
       }
 
+
       // 处理font标签样式属性
       if (node.tag === 'font') {
         var fontSize = [
@@ -210,7 +210,7 @@ function html2json(html, imageMode) {
         bufArray.unshift(node);
       }
     },
-    end: function(tag) {
+    end: function (tag) {
       //debug(tag);
       // merge into parent tag
       var node = bufArray.shift();
@@ -232,7 +232,7 @@ function html2json(html, imageMode) {
         parent.nodes.push(node);
       }
     },
-    chars: function(text) {
+    chars: function (text) {
       //debug(text);
       var node = {
         node: 'text',
@@ -252,7 +252,7 @@ function html2json(html, imageMode) {
         parent.nodes.push(node);
       }
     },
-    comment: function(text) {
+    comment: function (text) {
       //debug(text);
       // var node = {
       //     node: 'comment',
