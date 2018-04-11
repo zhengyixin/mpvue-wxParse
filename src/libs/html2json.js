@@ -65,7 +65,7 @@ function trimHtml(html) {
     .replace(/[ ]+</gi, '<');
 }
 
-function html2json(html, imageMode) {
+function html2json(html, imageMode, debug) {
   //处理字符串
   html = removeDOCTYPE(html);
   html = trimHtml(html);
@@ -80,7 +80,6 @@ function html2json(html, imageMode) {
   var index = 0;
   HTMLParser(html, {
     start: function (tag, attrs, unary) {
-      //debug(tag, attrs, unary);
       // node for this element
       var node = {
         node: 'element',
@@ -110,14 +109,14 @@ function html2json(html, imageMode) {
         var name = attr.name;
         var value = attr.value;
         if (name == 'class') {
-          console.dir(value);
+          if (debug) console.dir(value);
           //  value = value.join("")
           node.classStr = value;
         }
         // has multi attibutes
         // make it array of attribute
         if (name == 'style') {
-          console.dir(value);
+          if (debug) console.dir(value);
           //  value = value.join("")
           node.styleStr = value;
         }
@@ -211,10 +210,11 @@ function html2json(html, imageMode) {
       }
     },
     end: function (tag) {
-      //debug(tag);
       // merge into parent tag
       var node = bufArray.shift();
-      if (node.tag !== tag) console.error('invalid state: mismatch end tag');
+      if (node.tag !== tag && debug) {
+        console.error('invalid state: mismatch end tag');
+      }
 
       //当有缓存source资源时于于video补上src资源
       if (node.tag === 'video' && results.source) {
@@ -233,7 +233,6 @@ function html2json(html, imageMode) {
       }
     },
     chars: function (text) {
-      //debug(text);
       var node = {
         node: 'text',
         text: text
@@ -253,7 +252,6 @@ function html2json(html, imageMode) {
       }
     },
     comment: function (text) {
-      //debug(text);
       // var node = {
       //     node: 'comment',
       //     text: text,
