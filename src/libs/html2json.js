@@ -12,50 +12,33 @@
  * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
  */
 
-var __placeImgeUrlHttps = 'https';
-import wxDiscode from './wxDiscode.js';
-import HTMLParser from './htmlparser.js';
-// Empty Elements - HTML 5
-var empty = makeMap(
-  'area,base,basefont,br,col,frame,hr,img,input,link,meta,param,embed,command,keygen,source,track,wbr'
-);
-// Block Elements - HTML 5
-var block = makeMap(
-  'br,a,code,address,article,applet,aside,audio,blockquote,button,canvas,center,dd,del,dir,div,dl,dt,fieldset,figcaption,figure,footer,form,frameset,h1,h2,h3,h4,h5,h6,header,hgroup,hr,iframe,ins,isindex,li,map,menu,noframes,noscript,object,ol,output,p,pre,section,script,table,tbody,td,tfoot,th,thead,tr,ul,video'
-);
+import wxDiscode from './wxDiscode';
+import HTMLParser from './htmlparser';
 
-// Inline Elements - HTML 5
-var inline = makeMap(
-  'abbr,acronym,applet,b,basefont,bdo,big,button,cite,del,dfn,em,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,span,strike,strong,sub,sup,textarea,tt,u,var'
-);
+const placeImgeUrlHttps = 'https';
 
-// Elements that you can, intentionally, leave open
-// (and which close themselves)
-var closeSelf = makeMap('colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr');
-
-// Attributes that have their values filled in disabled="disabled"
-var fillAttrs = makeMap(
-  'checked,compact,declare,defer,disabled,ismap,multiple,nohref,noresize,noshade,nowrap,readonly,selected'
-);
-
-// Special Elements (can contain anything)
-var special = makeMap('script,style,view,scroll-view,block');
 function makeMap(str) {
-  var obj = {},
-    items = str.split(',');
-  for (var i = 0; i < items.length; i++) obj[items[i]] = true;
+  const obj = {};
+  const items = str.split(',');
+  for (let i = 0; i < items.length; i += 1) obj[items[i]] = true;
   return obj;
 }
 
-function q(v) {
-  return '"' + v + '"';
-}
+// Block Elements - HTML 5
+const block = makeMap('br,a,code,address,article,applet,aside,audio,blockquote,button,canvas,center,dd,del,dir,div,dl,dt,fieldset,figcaption,figure,footer,form,frameset,h1,h2,h3,h4,h5,h6,header,hgroup,hr,iframe,ins,isindex,li,map,menu,noframes,noscript,object,ol,output,p,pre,section,script,table,tbody,td,tfoot,th,thead,tr,ul,video');
+
+// Inline Elements - HTML 5
+const inline = makeMap('abbr,acronym,applet,b,basefont,bdo,big,button,cite,del,dfn,em,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,span,strike,strong,sub,sup,textarea,tt,u,var');
+
+// Elements that you can, intentionally, leave open
+// (and which close themselves)
+const closeSelf = makeMap('colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr');
 
 function removeDOCTYPE(html) {
   return html
-    .replace(/<\?xml.*\?>\n/, '')
-    .replace(/<.*!doctype.*\>\n/, '')
-    .replace(/<.*!DOCTYPE.*\>\n/, '');
+    .replace(/<\?xml.*\\?>\n/, '')
+    .replace(/<.*!doctype.*\\>\n/, '')
+    .replace(/<.*!DOCTYPE.*\\>\n/, '');
 }
 
 function trimHtml(html) {
@@ -66,38 +49,38 @@ function trimHtml(html) {
 }
 
 function html2json(html, image, debug) {
-  //处理字符串
+  // 处理字符串
   html = removeDOCTYPE(html);
   html = trimHtml(html);
   html = wxDiscode.strDiscode(html);
-  //生成node节点
-  var bufArray = [];
-  var results = {
+  // 生成node节点
+  const bufArray = [];
+  const results = {
     nodes: [],
     images: [],
-    imageUrls: []
+    imageUrls: [],
   };
-  var index = 0;
-  
+  let index = 0;
+
   image.urls = results.imageUrls;
 
   HTMLParser(html, {
-    start: function (tag, attrs, unary) {
+    start(tag, attrs, unary) {
       // node for this element
-      var node = {
+      const node = {
         node: 'element',
-        tag: tag
+        tag,
       };
 
       if (bufArray.length === 0) {
         node.index = index.toString();
         index += 1;
       } else {
-        var parent = bufArray[0];
+        const parent = bufArray[0];
         if (parent.nodes === undefined) {
           parent.nodes = [];
         }
-        node.index = parent.index + '.' + parent.nodes.length;
+        node.index = `${parent.index}.${parent.nodes.length}`;
       }
 
       if (block[tag]) {
@@ -108,17 +91,17 @@ function html2json(html, image, debug) {
         node.tagType = 'closeSelf';
       }
 
-      node.attr = attrs.reduce(function (pre, attr) {
-        var name = attr.name;
-        var value = attr.value;
-        if (name == 'class') {
+      node.attr = attrs.reduce((pre, attr) => {
+        const { name } = attr;
+        let { value } = attr;
+        if (name === 'class') {
           if (debug) console.dir(value);
           //  value = value.join("")
           node.classStr = value;
         }
         // has multi attibutes
         // make it array of attribute
-        if (name == 'style') {
+        if (name === 'style') {
           if (debug) console.dir(value);
           //  value = value.join("")
           node.styleStr = value;
@@ -148,9 +131,10 @@ function html2json(html, image, debug) {
       // 对img添加额外数据
       if (node.tag === 'img') {
         node.imgIndex = results.images.length;
-        var imgUrl = node.attr.src;
-        imgUrl = wxDiscode.urlToHttpUrl(imgUrl, __placeImgeUrlHttps);
+        let imgUrl = node.attr.src;
+        imgUrl = wxDiscode.urlToHttpUrl(imgUrl, placeImgeUrlHttps);
         node.attr.src = imgUrl || '';
+        console.log(node.attr.src);
         node.image = image;
         if (imgUrl) {
           results.images.push(node);
@@ -160,39 +144,38 @@ function html2json(html, image, debug) {
 
       // 处理a标签属性
       if (node.tag === 'a') {
-        node.attr.href = node.attr.href || ''
+        node.attr.href = node.attr.href || '';
       }
 
       // 处理font标签样式属性
       if (node.tag === 'font') {
-        var fontSize = [
+        const fontSize = [
           'x-small',
           'small',
           'medium',
           'large',
           'x-large',
           'xx-large',
-          '-webkit-xxx-large'
+          '-webkit-xxx-large',
         ];
-        var styleAttrs = {
+        const styleAttrs = {
           color: 'color',
           face: 'font-family',
-          size: 'font-size'
+          size: 'font-size',
         };
         if (!node.attr.style) node.attr.style = [];
         if (!node.styleStr) node.styleStr = '';
-        for (var key in styleAttrs) {
+        Object.keys(styleAttrs).forEach((key) => {
           if (node.attr[key]) {
-            var value =
-              key === 'size' ? fontSize[node.attr[key] - 1] : node.attr[key];
+            const value = key === 'size' ? fontSize[node.attr[key] - 1] : node.attr[key];
             node.attr.style.push(styleAttrs[key]);
             node.attr.style.push(value);
-            node.styleStr += styleAttrs[key] + ': ' + value + ';';
+            node.styleStr += `${styleAttrs[key]}: ${value};`;
           }
-        }
+        });
       }
 
-      //临时记录source资源
+      // 临时记录source资源
       if (node.tag === 'source') {
         results.source = node.attr.src;
       }
@@ -201,7 +184,7 @@ function html2json(html, image, debug) {
         // if this tag doesn't have end tag
         // like <img src="hoge.png"/>
         // add to parents
-        var parent = bufArray[0] || results;
+        const parent = bufArray[0] || results;
         if (parent.nodes === undefined) {
           parent.nodes = [];
         }
@@ -210,14 +193,14 @@ function html2json(html, image, debug) {
         bufArray.unshift(node);
       }
     },
-    end: function (tag) {
+    end(tag) {
       // merge into parent tag
-      var node = bufArray.shift();
+      const node = bufArray.shift();
       if (node.tag !== tag && debug) {
         console.error('invalid state: mismatch end tag');
       }
 
-      //当有缓存source资源时于于video补上src资源
+      // 当有缓存source资源时于于video补上src资源
       if (node.tag === 'video' && results.source) {
         node.attr.src = results.source;
         delete results.source;
@@ -226,17 +209,17 @@ function html2json(html, image, debug) {
       if (bufArray.length === 0) {
         results.nodes.push(node);
       } else {
-        var parent = bufArray[0];
+        const parent = bufArray[0];
         if (parent.nodes === undefined) {
           parent.nodes = [];
         }
         parent.nodes.push(node);
       }
     },
-    chars: function (text) {
-      var node = {
+    chars(text) {
+      const node = {
         node: 'text',
-        text: text
+        text,
       };
 
       if (bufArray.length === 0) {
@@ -244,27 +227,27 @@ function html2json(html, image, debug) {
         index += 1;
         results.nodes.push(node);
       } else {
-        var parent = bufArray[0];
+        const parent = bufArray[0];
         if (parent.nodes === undefined) {
           parent.nodes = [];
         }
-        node.index = parent.index + '.' + parent.nodes.length;
+        node.index = `${parent.index}.${parent.nodes.length}`;
         parent.nodes.push(node);
       }
     },
-    comment: function (text) {
-      // var node = {
-      //     node: 'comment',
-      //     text: text,
-      // };
-      // var parent = bufArray[0];
-      // if (parent.nodes === undefined) {
-      //     parent.nodes = [];
-      // }
-      // parent.nodes.push(node);
-    }
+    comment(text) {
+      const node = {
+        node: 'comment',
+        text,
+      };
+      const parent = bufArray[0];
+      if (parent.nodes === undefined) {
+        parent.nodes = [];
+      }
+      parent.nodes.push(node);
+    },
   });
   return results;
 }
 
-export default html2json
+export default html2json;

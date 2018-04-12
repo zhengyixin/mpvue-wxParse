@@ -4,6 +4,7 @@
   "description": "适用于 Mpvue 的微信小程序富文本解析自定义组件，支持HTML及markdown解析",
   "main": "src/wxParse.vue",
   "scripts": {
+    "lint": "eslint --format node_modules/eslint-friendly-formatter ./src/**",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,5 +25,13 @@
   "bugs": {
     "url": "https://github.com/F-loat/mpvue-wxParse/issues"
   },
-  "homepage": "https://github.com/F-loat/mpvue-wxParse#readme"
+  "homepage": "https://github.com/F-loat/mpvue-wxParse#readme",
+  "devDependencies": {
+    "babel-eslint": "^8.2.2",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-vuefix": "^0.2.1"
+  }
 }

@@ -74,19 +74,19 @@
 </template>
 
 <script>
-import wxParseTemplate from './wxParseTemplate3'
-import wxParseImg from './wxParseImg'
-import wxParseVideo from './wxParseVideo'
+import wxParseTemplate from './wxParseTemplate3';
+import wxParseImg from './wxParseImg';
+import wxParseVideo from './wxParseVideo';
 
 export default {
   name: 'wxParseTemplate2',
   props: {
-    node: {}
+    node: {},
   },
   components: {
     wxParseTemplate,
     wxParseImg,
-    wxParseVideo
-  }
-}
+    wxParseVideo,
+  },
+};
 </script>

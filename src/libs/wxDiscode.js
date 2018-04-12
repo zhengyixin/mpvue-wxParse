@@ -40,7 +40,7 @@ function strNumDiscode(str) {
   return str;
 }
 
-//HTML 支持的希腊字母
+// HTML 支持的希腊字母
 function strGreeceDiscode(str) {
   str = str.replace(/&Alpha;/g, 'Α');
   str = str.replace(/&Beta;/g, 'Β');
@@ -183,15 +183,15 @@ function strDiscode(str) {
   return str;
 }
 function urlToHttpUrl(url, rep) {
-  var patt1 = new RegExp('^//');
-  var result = patt1.test(url);
+  const patt1 = new RegExp('^//');
+  const result = patt1.test(url);
   if (result) {
-    url = rep + ':' + url;
+    url = `${rep}:${url}`;
   }
   return url;
 }
 
 export default {
-  strDiscode: strDiscode,
-  urlToHttpUrl: urlToHttpUrl
+  strDiscode,
+  urlToHttpUrl,
 };

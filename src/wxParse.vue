@@ -17,7 +17,7 @@
 
 <script>
 import HtmlToJson from './libs/html2json';
-import wxParseTemplate from './components/wxParseTemplate0'
+import wxParseTemplate from './components/wxParseTemplate0';
 
 export default {
   name: 'wxParse',
@@ -25,8 +25,8 @@ export default {
     content: {
       type: String,
       default() {
-        return '<div class="color:red;">数据不能为空</div>'
-      }
+        return '<div class="color:red;">数据不能为空</div>';
+      },
     },
     image: {
       type: String,
@@ -34,29 +34,29 @@ export default {
         return {
           mode: 'aspectFit',
           padding: 0,
-          lazyLoad: false
-        }
-      }
+          lazyLoad: false,
+        };
+      },
     },
     debug: {
       type: Boolean,
       default() {
-        return false
-      }
-    }
+        return false;
+      },
+    },
   },
   components: {
-    wxParseTemplate
+    wxParseTemplate,
   },
   computed: {
     wxParseData() {
-      const { content, image, debug } = this
-      const transData = HtmlToJson(content, image, debug)
-      if (debug) console.log(JSON.stringify(transData, null, ' '))
-      return transData
-    }
-  }
-}
+      const { content, image, debug } = this;
+      const transData = HtmlToJson(content, image, debug);
+      if (debug) console.log(JSON.stringify(transData, null, ' '));
+      return transData;
+    },
+  },
+};
 
 </script>
 

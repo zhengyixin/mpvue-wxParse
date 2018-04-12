@@ -9,7 +9,7 @@
 export default {
   name: 'wxParseVideo',
   props: {
-    node: {}
-  }
-}
+    node: {},
+  },
+};
 </script>
