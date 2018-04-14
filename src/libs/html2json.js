@@ -134,7 +134,6 @@ function html2json(html, image, debug) {
         let imgUrl = node.attr.src;
         imgUrl = wxDiscode.urlToHttpUrl(imgUrl, placeImgeUrlHttps);
         node.attr.src = imgUrl || '';
-        console.log(node.attr.src);
         node.image = image;
         if (imgUrl) {
           results.images.push(node);
