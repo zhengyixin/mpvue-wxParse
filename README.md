@@ -22,14 +22,16 @@
 | padding          | Number         | 0             | 图片内边距          |
 | lazyLoad         | Boolean        | false         | 图片懒加载          |
 
+
 ## 基本使用方法
 
-* 1. 安装
+* 安装
+
 ``` bash
 npm i mpvue-wxparse
 ```
 
-* 2. 使用
+* 使用
 
 ``` vue
 <template>
@@ -60,14 +62,12 @@ export default {
 > 先将 markdown 转换为 html 即可
 
 ``` bash
-npm install showdown
+npm install marked
 ```
 
 ``` js
-import showdown from 'showdown'
+import marked from 'marked'
 import wxParse from 'mpvue-wxparse'
-
-const converter = new showdown.Converter()
 
 export default {
   components: {
@@ -75,7 +75,7 @@ export default {
   },
   data () {
     return {
-      article: converter.makeHtml(`#hello, markdown!`)
+      article: marked(`#hello, markdown!`)
     }
   }
 }
@@ -87,6 +87,7 @@ export default {
 * 打包时出错 `ERROR in static/js/vendor.js from UglifyJs`
 
 参照以下配置使 babel 处理 mpvue-wxparse，或直接关闭 UglifyJs 插件
+
 ``` js
 // webpack.base.conf.js
 {
