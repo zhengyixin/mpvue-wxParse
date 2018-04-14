@@ -218,7 +218,7 @@ function html2json(html, image, debug) {
     chars(text) {
       const node = {
         node: 'text',
-        text,
+        text: text.trim(),
       };
 
       if (bufArray.length === 0) {
