@@ -6,6 +6,10 @@
 [![npm downloads](http://img.shields.io/npm/dm/mpvue-wxparse.svg)](https://npmjs.org/package/mpvue-wxparse)
 
 
+## 扫码体验
+![小程序码](./static/qrcode.jpg)
+
+
 ## 属性
 
 | 名称              | 类型           | 默认值        | 描述           |
