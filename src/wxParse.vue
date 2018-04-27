@@ -22,10 +22,11 @@ import wxParseTemplate from './components/wxParseTemplate0';
 export default {
   name: 'wxParse',
   props: {
-    content: {
+    content: String,
+    noData: {
       type: String,
       default() {
-        return '<div class="color:red;">数据不能为空</div>';
+        return '<div style="color: red;">数据不能为空</div>';
       },
     },
     image: {
@@ -50,8 +51,9 @@ export default {
   },
   computed: {
     wxParseData() {
-      const { content, image, debug } = this;
-      const transData = HtmlToJson(content, image, debug);
+      const { content, noData, image, debug } = this;
+      const parseData = content || noData;
+      const transData = HtmlToJson(parseData, image, debug);
       if (debug) console.log(JSON.stringify(transData, null, ' '));
       return transData;
     },
