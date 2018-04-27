@@ -35,10 +35,8 @@ const inline = makeMap('abbr,acronym,applet,b,basefont,bdo,big,button,cite,del,d
 const closeSelf = makeMap('colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr');
 
 function removeDOCTYPE(html) {
-  return html
-    .replace(/<\?xml.*\\?>\n/, '')
-    .replace(/<.*!doctype.*\\>\n/, '')
-    .replace(/<.*!DOCTYPE.*\\>\n/, '');
+  const isDocument = /<body.*>([^]*)<\/body>/.test(html);
+  return isDocument ? RegExp.$1 : html;
 }
 
 function trimHtml(html) {
