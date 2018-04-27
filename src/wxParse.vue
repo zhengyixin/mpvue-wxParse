@@ -22,15 +22,16 @@ import wxParseTemplate from './components/wxParseTemplate0';
 export default {
   name: 'wxParse',
   props: {
-    content: String,
+    content: {
+      type: String,
+      default: '',
+    },
     noData: {
       type: String,
-      default() {
-        return '<div style="color: red;">数据不能为空</div>';
-      },
+      default: '<div style="color: red;">数据不能为空</div>',
     },
     image: {
-      type: String,
+      type: Object,
       default() {
         return {
           mode: 'aspectFit',
