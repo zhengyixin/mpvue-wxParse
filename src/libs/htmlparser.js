@@ -116,18 +116,7 @@ function HTMLParser(html, handler) {
 
     // Make sure we're not in a script or style element
     if (!stack.last() || !special[stack.last()]) {
-      // Comment
-      if (html.indexOf('<!--') === 0) {
-        index = html.indexOf('-->');
-
-        if (index >= 0) {
-          if (handler.comment) handler.comment(html.substring(4, index));
-          html = html.substring(index + 3);
-          chars = false;
-        }
-
-        // end tag
-      } else if (html.indexOf('</') === 0) {
+      if (html.indexOf('</') === 0) {
         match = html.match(endTag);
 
         if (match) {

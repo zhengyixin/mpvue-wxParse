@@ -234,17 +234,6 @@ function html2json(html, image, debug) {
         parent.nodes.push(node);
       }
     },
-    comment(text) {
-      const node = {
-        node: 'comment',
-        text,
-      };
-      const parent = bufArray[0];
-      if (parent.nodes === undefined) {
-        parent.nodes = [];
-      }
-      parent.nodes.push(node);
-    },
   });
   return results;
 }
