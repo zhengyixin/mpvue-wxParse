@@ -39,22 +39,15 @@ export default {
         };
       },
     },
-    debug: {
-      type: Boolean,
-      default() {
-        return false;
-      },
-    },
   },
   components: {
     wxParseTemplate,
   },
   computed: {
     wxParseData() {
-      const { content, noData, image, debug } = this;
+      const { content, noData, image } = this;
       const parseData = content || noData;
-      const transData = HtmlToJson(parseData, image, debug);
-      if (debug) console.log(JSON.stringify(transData, null, ' '));
+      const transData = HtmlToJson(parseData, image);
       return transData;
     },
   },

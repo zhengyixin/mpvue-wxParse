@@ -46,7 +46,7 @@ function trimHtml(html) {
     .replace(/[ ]+</gi, '<');
 }
 
-function html2json(html, image, debug) {
+function html2json(html, image) {
   // 处理字符串
   html = removeDOCTYPE(html);
   html = trimHtml(html);
@@ -88,15 +88,11 @@ function html2json(html, image, debug) {
         const { name } = attr;
         let { value } = attr;
         if (name === 'class') {
-          if (debug) console.dir(value);
-          //  value = value.join("")
           node.classStr = value;
         }
         // has multi attibutes
         // make it array of attribute
         if (name === 'style') {
-          if (debug) console.dir(value);
-          //  value = value.join("")
           node.styleStr = value;
         }
         if (value.match(/ /)) {
@@ -188,7 +184,7 @@ function html2json(html, image, debug) {
     end(tag) {
       // merge into parent tag
       const node = bufArray.shift();
-      if (node.tag !== tag && debug) {
+      if (node.tag !== tag) {
         console.error('invalid state: mismatch end tag');
       }
 
