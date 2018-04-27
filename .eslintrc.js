@@ -6,7 +6,7 @@ module.exports = {
     'browser': false,
   },
   plugins: [
-    'vuefix',
+    'html',
   ],
   parserOptions: {
     sourceType: 'module',
