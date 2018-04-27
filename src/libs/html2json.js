@@ -58,7 +58,6 @@ function html2json(html, image, debug) {
     images: [],
     imageUrls: [],
   };
-  let index = 0;
 
   image.urls = results.imageUrls;
 
@@ -70,15 +69,11 @@ function html2json(html, image, debug) {
         tag,
       };
 
-      if (bufArray.length === 0) {
-        node.index = index.toString();
-        index += 1;
-      } else {
+      if (bufArray.length !== 0) {
         const parent = bufArray[0];
         if (parent.nodes === undefined) {
           parent.nodes = [];
         }
-        node.index = `${parent.index}.${parent.nodes.length}`;
       }
 
       if (block[tag]) {
@@ -214,21 +209,21 @@ function html2json(html, image, debug) {
       }
     },
     chars(text) {
+      const pureText = text.trim();
+      if (!pureText) return;
+
       const node = {
         node: 'text',
-        text: text.trim(),
+        text: pureText,
       };
 
       if (bufArray.length === 0) {
-        node.index = index.toString();
-        index += 1;
         results.nodes.push(node);
       } else {
         const parent = bufArray[0];
         if (parent.nodes === undefined) {
           parent.nodes = [];
         }
-        node.index = `${parent.index}.${parent.nodes.length}`;
         parent.nodes.push(node);
       }
     },

@@ -3,7 +3,7 @@
   <block v-if="node.node == 'element'">
     <block v-if="node.tag == 'button'">
       <button type="default" size="mini">
-        <block v-for="node of node.nodes" :key="node.index">
+        <block v-for="(node, index) of node.nodes" :key="index">
           <wx-parse-template :node="node" />
         </block>
       </button>
@@ -17,7 +17,7 @@
             <view :class="node.classStr" class="li-circle"></view>
           </view>
           <view :class="node.classStr" class="li-text">
-            <block v-for="node of node.nodes" :key="node.index">
+            <block v-for="(node, index) of node.nodes" :key="index">
               <wx-parse-template :node="node" />
             </block>
           </view>
@@ -38,7 +38,7 @@
     <!--a类型-->
     <block v-else-if="node.tag == 'a'">
       <view :class="node.classStr" class="inline a" :data-href="node.attr.href" :style="node.styleStr">
-        <block v-for="node of node.nodes" :key="node.index">
+        <block v-for="(node, index) of node.nodes" :key="index">
           <wx-parse-template :node="node" />
         </block>
       </view>
@@ -47,7 +47,7 @@
     <!--table类型-->
     <block v-else-if="node.tag == 'table'">
       <view :class="node.classStr" class="table" :style="node.styleStr">
-        <block v-for="node of node.nodes" :key="node.index">
+        <block v-for="(node, index) of node.nodes" :key="index">
           <wx-parse-template :node="node" />
         </block>
       </view>
@@ -61,7 +61,7 @@
     <!--其他块级标签-->
     <block v-else-if="node.tagType == 'block' && node.tag !== 'script'">
       <view :class="[node.classStr, node.tag]" :style="node.styleStr">
-        <block v-for="node of node.nodes" :key="node.index">
+        <block v-for="(node, index) of node.nodes" :key="index">
           <wx-parse-template :node="node" />
         </block>
       </view>
@@ -69,7 +69,7 @@
 
     <!--内联标签-->
     <view v-else-if="node.tagType == 'inline' && node.tag !== 'style'" :class="[node.classStr, node.tag]" class="inline" :style="node.styleStr">
-      <block v-for="node of node.nodes" :key="node.index">
+      <block v-for="(node, index) of node.nodes" :key="index">
         <wx-parse-template :node="node" />
       </block>
     </view>
