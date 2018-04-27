@@ -198,7 +198,7 @@ function html2json(html, image) {
         results.nodes.push(node);
       } else {
         const parent = bufArray[0];
-        if (parent.nodes === undefined) {
+        if (!parent.nodes) {
           parent.nodes = [];
         }
         parent.nodes.push(node);
