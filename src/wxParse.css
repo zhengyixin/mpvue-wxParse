@@ -160,44 +160,15 @@
 }
 
 .wxParse .ul {
-  margin: 10px 5px;
+  display: block;
+  list-style-type: disc;
+  margin: 1em 0;
+  padding-left: 16px;
 }
-.wxParse .li,
-.wxParse .li-inner {
-  display: flex;
+.wxParse .li {
+  display: list-item;
   align-items: baseline;
-  margin: 5px 0;
-}
-.wxParse .li-text {
-  display: flex;
-  align-items: center;
-  line-height: 20px;
-}
-.wxParse .li-circle {
-  display: inline-flex;
-  width: 5px;
-  height: 5px;
-  background-color: #333;
-  margin-right: 5px;
-  border-radius: 50%;
-  position: relative;
-  top: -2.5px;
-}
-.wxParse .li-square {
-  display: inline-flex;
-  width: 5px;
-  height: 5px;
-  background-color: #333;
-  margin-right: 5px;
-}
-.wxParse .li-ring {
-  display: inline-flex;
-  width: 5px;
-  height: 5px;
-  border: 1px solid #333;
-  border-radius: 50%;
-  background-color: #fff;
-  margin-right: 5px;
+  text-align: match-parent;
 }
 
 .wxParse .u {

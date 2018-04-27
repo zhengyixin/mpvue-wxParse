@@ -10,14 +10,7 @@
     <!--li类型-->
     <block v-else-if="node.tag == 'li'">
       <view :class="node.classStr" class="li" :style="node.styleStr">
-        <view :class="node.classStr" class="li-inner">
-          <view :class="node.classStr" class="li-text">
-            <view :class="node.classStr" class="li-circle"></view>
-          </view>
-          <view :class="node.classStr" class="li-text">
-            {{node.text}}
-          </view>
-        </view>
+        {{node.text}}
       </view>
     </block>
 

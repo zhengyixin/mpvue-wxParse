@@ -12,16 +12,9 @@
     <!--li类型-->
     <block v-else-if="node.tag == 'li'">
       <view :class="node.classStr" class="li" :style="node.styleStr">
-        <view :class="node.classStr" class="li-inner">
-          <view :class="node.classStr" class="li-text">
-            <view :class="node.classStr" class="li-circle"></view>
-          </view>
-          <view :class="node.classStr" class="li-text">
-            <block v-for="(node, index) of node.nodes" :key="index">
-              <wx-parse-template :node="node" />
-            </block>
-          </view>
-        </view>
+        <block v-for="(node, index) of node.nodes" :key="index">
+          <wx-parse-template :node="node" />
+        </block>
       </view>
     </block>
 
