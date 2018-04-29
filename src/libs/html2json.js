@@ -55,7 +55,6 @@ function html2json(html, image) {
   const bufArray = [];
   const results = {
     nodes: [],
-    images: [],
     imageUrls: [],
   };
 
@@ -131,13 +130,12 @@ function html2json(html, image) {
 
       // 对img添加额外数据
       if (node.tag === 'img') {
-        node.imgIndex = results.images.length;
+        node.imgIndex = results.imageUrls.length;
         let imgUrl = node.attr.src;
         imgUrl = wxDiscode.urlToHttpUrl(imgUrl, placeImgeUrlHttps);
         node.attr.src = imgUrl || '';
         node.image = image;
         if (imgUrl) {
-          results.images.push(node);
           results.imageUrls.push(imgUrl);
         }
       }
