@@ -40,9 +40,6 @@ const closeSelf = makeMap('colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr');
 // Attributes that have their values filled in disabled="disabled"
 const fillAttrs = makeMap('checked,compact,declare,defer,disabled,ismap,multiple,nohref,noresize,noshade,nowrap,readonly,selected');
 
-// Special Elements (can contain anything)
-const special = makeMap('script,style,view,scroll-view,block');
-
 function HTMLParser(html, handler) {
   let index;
   let chars;
@@ -114,56 +111,38 @@ function HTMLParser(html, handler) {
   while (html) {
     chars = true;
 
-    // Make sure we're not in a script or style element
-    if (!stack.last() || !special[stack.last()]) {
-      if (html.indexOf('</') === 0) {
-        match = html.match(endTag);
+    if (html.indexOf('</') === 0) {
+      match = html.match(endTag);
 
-        if (match) {
-          html = html.substring(match[0].length);
-          match[0].replace(endTag, parseEndTag);
-          chars = false;
-        }
-
-        // start tag
-      } else if (html.indexOf('<') === 0) {
-        match = html.match(startTag);
-
-        if (match) {
-          html = html.substring(match[0].length);
-          match[0].replace(startTag, parseStartTag);
-          chars = false;
-        }
+      if (match) {
+        html = html.substring(match[0].length);
+        match[0].replace(endTag, parseEndTag);
+        chars = false;
       }
 
-      if (chars) {
+      // start tag
+    } else if (html.indexOf('<') === 0) {
+      match = html.match(startTag);
+
+      if (match) {
+        html = html.substring(match[0].length);
+        match[0].replace(startTag, parseStartTag);
+        chars = false;
+      }
+    }
+
+    if (chars) {
+      index = html.indexOf('<');
+      let text = '';
+      while (index === 0) {
+        text += '<';
+        html = html.substring(1);
         index = html.indexOf('<');
-        let text = '';
-        while (index === 0) {
-          text += '<';
-          html = html.substring(1);
-          index = html.indexOf('<');
-        }
-        text += index < 0 ? html : html.substring(0, index);
-        html = index < 0 ? '' : html.substring(index);
-
-        if (handler.chars) handler.chars(text);
       }
-    } else {
-      html = html.replace(
-        new RegExp(`([\\s\\S]*?)</${stack.last()}[^>]*>`),
-        (all, text) => {
-          text = text.replace(
-            /<!--([\s\S]*?)-->|<!\[CDATA\[([\s\S]*?)]]>/g,
-            '$1$2',
-          );
-          if (handler.chars) handler.chars(text);
+      text += index < 0 ? html : html.substring(0, index);
+      html = index < 0 ? '' : html.substring(index);
 
-          return '';
-        },
-      );
-
-      parseEndTag('', stack.last());
+      if (handler.chars) handler.chars(text);
     }
 
     if (html === last) throw new Error(`Parse Error: ${html}`);

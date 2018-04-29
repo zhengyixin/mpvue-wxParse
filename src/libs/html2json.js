@@ -43,7 +43,9 @@ function trimHtml(html) {
   return html
     .replace(/<!--.*?-->/gi, '')
     .replace(/\/\*.*?\*\//gi, '')
-    .replace(/[ ]+</gi, '<');
+    .replace(/[ ]+</gi, '<')
+    .replace(/<script[^]*<\/script>/gi, '')
+    .replace(/<style[^]*<\/style>/gi, '');
 }
 
 function html2json(html, image) {
