@@ -25,10 +25,10 @@ function makeMap(str) {
 }
 
 // Block Elements - HTML 5
-const block = makeMap('br,a,code,address,article,applet,aside,audio,blockquote,button,canvas,center,dd,del,dir,div,dl,dt,fieldset,figcaption,figure,footer,form,frameset,h1,h2,h3,h4,h5,h6,header,hgroup,hr,iframe,ins,isindex,li,map,menu,noframes,noscript,object,ol,output,p,pre,section,script,table,tbody,td,tfoot,th,thead,tr,ul,video');
+const block = makeMap('br,code,address,article,applet,aside,audio,blockquote,button,canvas,center,dd,del,dir,div,dl,dt,fieldset,figcaption,figure,footer,form,frameset,h1,h2,h3,h4,h5,h6,header,hgroup,hr,iframe,ins,isindex,li,map,menu,noframes,noscript,object,ol,output,p,pre,section,script,table,tbody,td,tfoot,th,thead,tr,ul,video');
 
 // Inline Elements - HTML 5
-const inline = makeMap('abbr,acronym,applet,b,basefont,bdo,big,button,cite,del,dfn,em,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,span,strike,strong,sub,sup,textarea,tt,u,var');
+const inline = makeMap('a,abbr,acronym,applet,b,basefont,bdo,big,button,cite,del,dfn,em,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,span,strike,strong,sub,sup,textarea,tt,u,var');
 
 // Elements that you can, intentionally, leave open
 // (and which close themselves)
@@ -117,6 +117,18 @@ function html2json(html, image) {
         return pre;
       }, {});
 
+      // 优化样式相关属性
+      if (node.classStr) {
+        node.classStr += ` ${node.tag}`;
+      } else {
+        node.classStr = node.tag;
+      }
+      if (node.tagType === 'inline') {
+        node.classStr += ' inline';
+      }
+      node.attr.class = null;
+      node.attr.style = null;
+
       // 对img添加额外数据
       if (node.tag === 'img') {
         node.imgIndex = results.images.length;
@@ -151,13 +163,10 @@ function html2json(html, image) {
           face: 'font-family',
           size: 'font-size',
         };
-        if (!node.attr.style) node.attr.style = [];
         if (!node.styleStr) node.styleStr = '';
         Object.keys(styleAttrs).forEach((key) => {
           if (node.attr[key]) {
             const value = key === 'size' ? fontSize[node.attr[key] - 1] : node.attr[key];
-            node.attr.style.push(styleAttrs[key]);
-            node.attr.style.push(value);
             node.styleStr += `${styleAttrs[key]}: ${value};`;
           }
         });

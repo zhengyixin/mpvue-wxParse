@@ -186,7 +186,6 @@
 
 .wxParse .table {
   width: 100%;
-  border-top: 1px solid #e0e0e0;
 }
 .wxParse .thead, .wxParse .tfoot, .wxParse .tr {
   display: flex;

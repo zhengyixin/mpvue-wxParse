@@ -11,7 +11,7 @@
 
     <!--li类型-->
     <block v-else-if="node.tag == 'li'">
-      <view :class="node.classStr" class="li" :style="node.styleStr">
+      <view :class="node.classStr" :style="node.styleStr">
         <block v-for="(node, index) of node.nodes" :key="index">
           <wx-parse-template :node="node" />
         </block>
@@ -30,7 +30,7 @@
 
     <!--a类型-->
     <block v-else-if="node.tag == 'a'">
-      <view :class="node.classStr" class="inline a" :data-href="node.attr.href" :style="node.styleStr">
+      <view :class="node.classStr" :data-href="node.attr.href" :style="node.styleStr">
         <block v-for="(node, index) of node.nodes" :key="index">
           <wx-parse-template :node="node" />
         </block>
@@ -52,8 +52,8 @@
     </block>
 
     <!--其他块级标签-->
-    <block v-else-if="node.tagType == 'block' && node.tag !== 'script'">
-      <view :class="[node.classStr, node.tag]" :style="node.styleStr">
+    <block v-else-if="node.tagType == 'block'">
+      <view :class="node.classStr" :style="node.styleStr">
         <block v-for="(node, index) of node.nodes" :key="index">
           <wx-parse-template :node="node" />
         </block>
@@ -61,7 +61,7 @@
     </block>
 
     <!--内联标签-->
-    <view v-else-if="node.tagType == 'inline' && node.tag !== 'style'" :class="[node.classStr, node.tag]" class="inline" :style="node.styleStr">
+    <view v-else-if="node.tagType == 'inline'" :class="node.classStr" :style="node.styleStr">
       <block v-for="(node, index) of node.nodes" :key="index">
         <wx-parse-template :node="node" />
       </block>
