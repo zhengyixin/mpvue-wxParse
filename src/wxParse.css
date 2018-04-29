@@ -142,6 +142,7 @@
 }
 
 .wxParse .img {
+  display: inline-block;
   width: 0;
   height: 0;
   max-width: 100%;

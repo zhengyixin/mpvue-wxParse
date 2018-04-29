@@ -1,6 +1,5 @@
 <template>
   <image
-    class="img"
     :mode="node.image.mode"
     :lazy-load="node.image.lazyLoad"
     :class="node.classStr"

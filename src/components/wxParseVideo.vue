@@ -1,6 +1,6 @@
 <template>
   <!--增加video标签支持，并循环添加-->
-  <view :class="node.classStr" class="video" :style="node.styleStr">
+  <view :class="node.classStr" :style="node.styleStr">
     <video :class="node.classStr" class="video-video" :src="node.attr.src"></video>
   </view>
 </template>
