@@ -16,8 +16,6 @@ export default {
   name: 'wxParseImg',
   data() {
     return {
-      realWindowWidth: 0,
-      realWindowHeight: 0,
       newStyleStr: '',
       preview: true,
     };
@@ -30,19 +28,7 @@ export default {
       },
     },
   },
-  mounted() {
-    this.getSysWH();
-  },
   methods: {
-    getSysWH() {
-      // 获取当前设备屏幕宽度和高度, 写在这里只是为了方便调试, 最好是写到 wxParse.vue 再传入
-      wx.getSystemInfo({
-        success: (res) => {
-          this.realWindowWidth = res.windowWidth;
-          this.realWindowHeight = res.windowHeight;
-        },
-      });
-    },
     wxParseImgTap(e) {
       if (!this.preview) return;
       const { src } = e.target.dataset;
@@ -66,7 +52,7 @@ export default {
     wxAutoImageCal(originalWidth, originalHeight) {
       // 获取图片的原始长宽
       const { padding } = this.node.image;
-      const windowWidth = this.realWindowWidth - (2 * padding);
+      const windowWidth = this.node.screen.width - (2 * padding);
       const results = {};
 
       if (originalWidth < 100) {

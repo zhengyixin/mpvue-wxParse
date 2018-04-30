@@ -48,11 +48,24 @@ function trimHtml(html) {
     .replace(/<style[^]*<\/style>/gi, '');
 }
 
+function getScreenInfo () {
+  const screen = {};
+  wx.getSystemInfo({
+    success: (res) => {
+      screen.width = res.windowWidth;
+      screen.height = res.windowHeight;
+    },
+  });
+  return screen;
+}
+
 function html2json(html, customHandler, image) {
   // 处理字符串
   html = removeDOCTYPE(html);
   html = trimHtml(html);
   html = wxDiscode.strDiscode(html);
+  // 获取屏幕信息
+  const screen = getScreenInfo();
   // 生成node节点
   const bufArray = [];
   const results = {
@@ -132,11 +145,12 @@ function html2json(html, customHandler, image) {
 
       // 对img添加额外数据
       if (node.tag === 'img') {
-        node.imgIndex = results.imageUrls.length;
         let imgUrl = node.attr.src;
         imgUrl = wxDiscode.urlToHttpUrl(imgUrl, placeImgeUrlHttps);
         node.attr.src = imgUrl || '';
+        node.imgIndex = results.imageUrls.length;
         node.image = image;
+        node.screen = screen;
         if (imgUrl) {
           results.imageUrls.push(imgUrl);
         }
