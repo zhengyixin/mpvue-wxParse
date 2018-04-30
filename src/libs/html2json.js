@@ -48,7 +48,7 @@ function trimHtml(html) {
     .replace(/<style[^]*<\/style>/gi, '');
 }
 
-function html2json(html, image) {
+function html2json(html, customHandler, image) {
   // 处理字符串
   html = removeDOCTYPE(html);
   html = trimHtml(html);
@@ -177,6 +177,10 @@ function html2json(html, image) {
         results.source = node.attr.src;
       }
 
+      if (customHandler.start) {
+        customHandler.start(node);
+      }
+
       if (unary) {
         // if this tag doesn't have end tag
         // like <img src="hoge.png"/>
@@ -203,6 +207,10 @@ function html2json(html, image) {
         delete results.source;
       }
 
+      if (customHandler.end) {
+        customHandler.end(node);
+      }
+
       if (bufArray.length === 0) {
         results.nodes.push(node);
       } else {
@@ -221,6 +229,10 @@ function html2json(html, image) {
         node: 'text',
         text: pureText,
       };
+
+      if (customHandler.chars) {
+        customHandler.chars(node);
+      }
 
       if (bufArray.length === 0) {
         results.nodes.push(node);

@@ -12,11 +12,20 @@
 
 ## 属性
 
-| 名称              | 类型           | 默认值        | 描述              |
-| -----------------|--------------- | ------------- | ---------------- |
-| content          | String         | —             | 渲染内容          |
-| noData           | String         | 数据不能为空   | 空数据时的渲染展示 |
-| image            | Object         | 见下文        | 图片相关参数       |
+| 名称              | 类型           | 默认值        | 描述               |
+| -----------------|--------------- | ------------- | ----------------  |
+| content          | String         | —             | 渲染内容           |
+| noData           | String         | 数据不能为空   | 空数据时的渲染展示  |
+| startHandler     | Function       | null          | 自定义 parser 函数 |
+| endHandler       | Function       | null          | 自定义 parser 函数 |
+| charsHandler     | Function       | null          | 自定义 parser 函数 |
+| image            | Object         | 见下文        | 图片相关参数        |
+
+### 自定义 parser 函数具体介绍
+
+* 传入的参数为当前节点的 `node` 对象
+* 无需返回值，通过对 `node` 对象直接操作来完成需要的改动
+* 自定义函数会在原解析函数处理之后执行
 
 ### image 对象具体属性
 

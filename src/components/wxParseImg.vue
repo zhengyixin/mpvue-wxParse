@@ -19,7 +19,7 @@ export default {
       realWindowWidth: 0,
       realWindowHeight: 0,
       newStyleStr: '',
-      preview: true
+      preview: true,
     };
   },
   props: {

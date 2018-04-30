@@ -30,6 +30,18 @@ export default {
       type: String,
       default: '<div style="color: red;">数据不能为空</div>',
     },
+    startHandler: {
+      type: Function,
+      default: null,
+    },
+    endHandler: {
+      type: Function,
+      default: null,
+    },
+    charsHandler: {
+      type: Function,
+      default: null,
+    },
     image: {
       type: Object,
       default() {
@@ -46,9 +58,21 @@ export default {
   },
   computed: {
     wxParseData() {
-      const { content, noData, image } = this;
+      const {
+        content,
+        noData,
+        image,
+        startHandler,
+        endHandler,
+        charsHandler,
+      } = this;
       const parseData = content || noData;
-      const transData = HtmlToJson(parseData, image);
+      const customHandler = {
+        start: startHandler,
+        end: endHandler,
+        chars: charsHandler,
+      };
+      const transData = HtmlToJson(parseData, customHandler, image);
       return transData;
     },
   },
