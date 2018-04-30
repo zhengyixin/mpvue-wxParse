@@ -9,7 +9,7 @@
 <template>
 <!--基础元素-->
 <div class="wxParse" :class="className">
-  <block v-for="node of wxParseData.nodes" :key="node.index">
+  <block v-for="node of nodes" :key="node.index">
     <wxParseTemplate :node="node" />
   </block>
 </div>
@@ -61,8 +61,13 @@ export default {
   components: {
     wxParseTemplate,
   },
+  data() {
+    return {
+      imageUrls: [],
+    };
+  },
   computed: {
-    wxParseData() {
+    nodes() {
       const {
         content,
         noData,
@@ -77,8 +82,9 @@ export default {
         end: endHandler,
         chars: charsHandler,
       };
-      const transData = HtmlToJson(parseData, customHandler, imageProp);
-      return transData;
+      const { nodes, imageUrls } = HtmlToJson(parseData, customHandler, imageProp);
+      this.imageUrls = imageUrls;
+      return nodes;
     },
   },
   mounted() {
@@ -94,19 +100,17 @@ export default {
       this.$emit('navigate', href);
     },
     preview(src) {
-      const { imageUrls } = this.wxParseData;
-      if (!imageUrls.length) return;
+      if (!this.imageUrls.length) return;
       wx.previewImage({
         current: src,
-        urls: imageUrls,
+        urls: this.imageUrls,
       });
       this.$emit('preview', src);
     },
     removeImageUrl(src) {
-      const { imageUrls } = this.wxParseData;
+      const { imageUrls } = this;
       imageUrls.splice(imageUrls.indexOf(src), 1);
     },
   },
 };
-
 </script>

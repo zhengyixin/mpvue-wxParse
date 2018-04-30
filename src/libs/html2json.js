@@ -257,6 +257,7 @@ function html2json(html, customHandler, imageProp) {
       }
     },
   });
+
   return results;
 }
 
