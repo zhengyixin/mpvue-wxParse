@@ -222,12 +222,11 @@ function html2json(html, customHandler, image) {
       }
     },
     chars(text) {
-      const pureText = text.trim();
-      if (!pureText) return;
+      if (!text.trim()) return;
 
       const node = {
         node: 'text',
-        text: pureText,
+        text,
       };
 
       if (customHandler.chars) {
