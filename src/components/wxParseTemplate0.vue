@@ -51,21 +51,14 @@
       <text>\n</text>
     </block>
 
-    <!--其他块级标签-->
-    <block v-else-if="node.tagType == 'block'">
+    <!--其他标签-->
+    <block v-else>
       <view :class="node.classStr" :style="node.styleStr">
         <block v-for="(node, index) of node.nodes" :key="index">
           <wx-parse-template :node="node" />
         </block>
       </view>
     </block>
-
-    <!--内联标签-->
-    <view v-else-if="node.tagType == 'inline'" :class="node.classStr" :style="node.styleStr">
-      <block v-for="(node, index) of node.nodes" :key="index">
-        <wx-parse-template :node="node" />
-      </block>
-    </view>
 
   </block>
 

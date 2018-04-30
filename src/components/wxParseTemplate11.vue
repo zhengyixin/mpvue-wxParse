@@ -36,18 +36,12 @@
       <text>\n</text>
     </block>
 
-    <!--其他块级标签-->
-    <block v-else-if="node.tagType == 'block'">
+    <!--其他标签-->
+    <block v-else>
       <view :class="node.classStr" :style="node.styleStr">
         {{node.text}}
       </view>
     </block>
-
-    <!--内联标签-->
-    <view v-else-if="node.tagType == 'inline'" :class="node.classStr" :style="node.styleStr">
-      {{node.text}}
-    </view>
-
   </block>
 
   <!--判断是否是文本节点-->
