@@ -1,7 +1,7 @@
 <template>
   <image
-    :mode="node.image.mode"
-    :lazy-load="node.image.lazyLoad"
+    :mode="node.attr.mode"
+    :lazy-load="node.attr.lazyLoad"
     :class="node.classStr"
     :style="newStyleStr || node.styleStr"
     :data-src="node.attr.src"
@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import bus from '../utils/bus';
+
 export default {
   name: 'wxParseImg',
   data() {
@@ -33,10 +35,7 @@ export default {
       if (!this.preview) return;
       const { src } = e.target.dataset;
       if (!src) return;
-      wx.previewImage({
-        current: src, // 当前显示图片的http链接
-        urls: this.node.image.urls, // 需要预览的图片http链接列表
-      });
+      bus.$emit('preview', src);
     },
     // 图片视觉宽高计算函数区
     wxParseImgLoad(e) {
@@ -45,21 +44,20 @@ export default {
       const { width, height } = e.mp.detail;
       const recal = this.wxAutoImageCal(width, height);
       const { imageheight, imageWidth } = recal;
-      const { padding } = this.node.image;
+      const { padding } = this.node.attr;
       this.newStyleStr = `height: ${imageheight}px; width: ${imageWidth}px; padding: 0 ${padding}px;`;
     },
     // 计算视觉优先的图片宽高
     wxAutoImageCal(originalWidth, originalHeight) {
       // 获取图片的原始长宽
-      const { padding } = this.node.image;
+      const { padding } = this.node.attr;
       const windowWidth = this.node.screen.width - (2 * padding);
       const results = {};
 
       if (originalWidth < 100) {
-        const { urls } = this.node.image;
         const { src } = this.node.attr;
+        bus.$emit('nopreview', src);
         this.preview = false;
-        urls.splice(urls.indexOf(src), 1);
       }
 
       // 判断按照那种方式进行缩放

@@ -48,7 +48,7 @@ function trimHtml(html) {
     .replace(/<style[^]*<\/style>/gi, '');
 }
 
-function getScreenInfo () {
+function getScreenInfo() {
   const screen = {};
   wx.getSystemInfo({
     success: (res) => {
@@ -59,7 +59,7 @@ function getScreenInfo () {
   return screen;
 }
 
-function html2json(html, customHandler, image) {
+function html2json(html, customHandler, imageProp) {
   // 处理字符串
   html = removeDOCTYPE(html);
   html = trimHtml(html);
@@ -72,8 +72,6 @@ function html2json(html, customHandler, image) {
     nodes: [],
     imageUrls: [],
   };
-
-  image.urls = results.imageUrls;
 
   HTMLParser(html, {
     start(tag, attrs, unary) {
@@ -147,9 +145,10 @@ function html2json(html, customHandler, image) {
       if (node.tag === 'img') {
         let imgUrl = node.attr.src;
         imgUrl = wxDiscode.urlToHttpUrl(imgUrl, placeImgeUrlHttps);
-        node.attr.src = imgUrl || '';
+        Object.assign(node.attr, imageProp, {
+          src: imgUrl || '',
+        });
         node.imgIndex = results.imageUrls.length;
-        node.image = image;
         node.screen = screen;
         if (imgUrl) {
           results.imageUrls.push(imgUrl);
