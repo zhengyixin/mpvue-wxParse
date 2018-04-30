@@ -55,7 +55,7 @@ export default {
       const windowWidth = this.node.screen.width - (2 * padding);
       const results = {};
 
-      if (originalWidth < 100 || originalHeight < 100) {
+      if (originalWidth < 60 || originalHeight < 60) {
         const { src } = this.node.attr;
         bus.$emit('nopreview', src);
         this.preview = false;

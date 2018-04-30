@@ -83,7 +83,7 @@ export default {
         chars: charsHandler,
       };
       const { nodes, imageUrls } = HtmlToJson(parseData, customHandler, imageProp);
-      this.imageUrls = imageUrls;
+      this.imageUrls = imageUrls.map(url => url);
       return nodes;
     },
   },
