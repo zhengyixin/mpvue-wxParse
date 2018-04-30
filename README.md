@@ -14,6 +14,7 @@
 
 | 名称              | 类型           | 默认值        | 描述               |
 | -----------------|--------------- | ------------- | ----------------  |
+| className        | String         | —             | 自定义 class 名称  |
 | content          | String         | —             | 渲染内容           |
 | noData           | String         | 数据不能为空   | 空数据时的渲染展示  |
 | startHandler     | Function       | null          | 自定义 parser 函数 |
@@ -73,6 +74,10 @@ export default {
   }
 }
 </script>
+
+<style>
+@import url("mpvue-wxparse/src/wxParse.css");
+</style>
 ```
 
 
@@ -101,11 +106,13 @@ export default {
 ```
 
 
-## 常见问题
+## Tips
+
+* v0.6 之后的版本样式文件需自行引入
 
 * 打包时出错 `ERROR in static/js/vendor.js from UglifyJs`
 
-参照以下配置使 babel 处理 mpvue-wxparse，或直接关闭 UglifyJs 插件
+参照以下配置使 babel 处理 mpvue-wxparse，或更新 UglifyJs 插件
 
 ``` js
 // webpack.base.conf.js

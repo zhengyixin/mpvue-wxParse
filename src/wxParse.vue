@@ -8,7 +8,7 @@
 
 <template>
 <!--基础元素-->
-<div class="wxParse">
+<div class="wxParse" :class="className">
   <block v-for="node of wxParseData.nodes" :key="node.index">
     <wxParseTemplate :node="node" />
   </block>
@@ -23,6 +23,10 @@ import wxParseTemplate from './components/wxParseTemplate0';
 export default {
   name: 'wxParse',
   props: {
+    className: {
+      type: String,
+      default: '',
+    },
     content: {
       type: String,
       default: '',
@@ -106,7 +110,3 @@ export default {
 };
 
 </script>
-
-<style>
-@import url("./wxParse.css");
-</style>
