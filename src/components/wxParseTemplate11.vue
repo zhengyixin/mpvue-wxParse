@@ -51,9 +51,7 @@
   </block>
 
   <!--判断是否是文本节点-->
-  <block v-else-if="node.node == 'text'">
-    {{node.text}}
-  </block>
+  <block v-else-if="node.node == 'text'">{{node.text}}</block>
 </template>
 
 <script>
