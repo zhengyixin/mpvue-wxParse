@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import bus from '../utils/bus';
 import wxParseTemplate from './wxParseTemplate7';
 import wxParseImg from './wxParseImg';
 import wxParseVideo from './wxParseVideo';

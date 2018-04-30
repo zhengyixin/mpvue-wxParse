@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import bus from '../utils/bus';
 import wxParseImg from './wxParseImg';
 import wxParseVideo from './wxParseVideo';
 
