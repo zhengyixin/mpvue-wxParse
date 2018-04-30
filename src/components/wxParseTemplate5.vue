@@ -30,7 +30,7 @@ s<template>
 
     <!--a类型-->
     <block v-else-if="node.tag == 'a'">
-      <view :class="node.classStr" :data-href="node.attr.href" :style="node.styleStr">
+      <view @click="wxParseATap" :class="node.classStr" :data-href="node.attr.href" :style="node.styleStr">
         <block v-for="(node, index) of node.nodes" :key="index">
           <wx-parse-template :node="node" />
         </block>
@@ -71,6 +71,13 @@ export default {
     wxParseTemplate,
     wxParseImg,
     wxParseVideo,
+  },
+  methods: {
+    wxParseATap(e) {
+      const { href } = e.target.dataset;
+      if (!href) return;
+      bus.$emit('navigate', href);
+    },
   },
 };
 </script>

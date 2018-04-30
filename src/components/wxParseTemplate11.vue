@@ -26,7 +26,7 @@
 
     <!--a类型-->
     <block v-else-if="node.tag == 'a'">
-      <view :class="node.classStr" :data-href="node.attr.href" :style="node.styleStr">
+      <view @click="wxParseATap" :class="node.classStr" :data-href="node.attr.href" :style="node.styleStr">
         {{node.text}}
       </view>
     </block>
@@ -60,6 +60,13 @@ export default {
   components: {
     wxParseImg,
     wxParseVideo,
+  },
+  methods: {
+    wxParseATap(e) {
+      const { href } = e.target.dataset;
+      if (!href) return;
+      bus.$emit('navigate', href);
+    },
   },
 };
 </script>

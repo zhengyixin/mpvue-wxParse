@@ -82,8 +82,12 @@ export default {
   },
   methods: {
     initEvents() {
+      bus.$on('navigate', this.navigate);
       bus.$on('preview', this.preview);
       bus.$on('nopreview', this.removeImageUrl);
+    },
+    navigate(href) {
+      this.$emit('navigate', href);
     },
     preview(src) {
       const { imageUrls } = this.wxParseData;
