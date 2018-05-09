@@ -27,7 +27,6 @@
   padding: 0;
 }
 
-/*//标题 */
 .wxParse .div {
   margin: 0;
   padding: 0;
@@ -121,8 +120,6 @@
   text-decoration: line-through;
 }
 
-/*wxparse-自定义个性化的css样式*/
-/*增加video的css样式*/
 .wxParse .strong,
 .wxParse .s {
   display: inline;
@@ -160,16 +157,27 @@
   margin: 0;
 }
 
-.wxParse .ul {
+.wxParse .ul, .wxParse .ol {
   display: block;
-  list-style-type: disc;
   margin: 1em 0;
   padding-left: 16px;
+}
+.wxParse .ol {
+  list-style-type: disc;
+}
+.wxParse .ol {
+  list-style-type: decimal;
 }
 .wxParse .li {
   display: list-item;
   align-items: baseline;
   text-align: match-parent;
+}
+.wxParse .ul .ul, .wxParse .ol .ul {
+  list-style-type: circle;
+}
+.wxParse .ol .ol .ul, .wxParse .ol .ul .ul, .wxParse .ul .ol .ul, .wxParse .ul .ul .ul {
+    list-style-type: square;
 }
 
 .wxParse .u {
