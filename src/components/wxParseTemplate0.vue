@@ -23,6 +23,11 @@
       <wx-parse-video :node="node" />
     </block>
 
+    <!--audio类型-->
+    <block v-else-if="node.tag == 'audio'">
+      <wx-parse-audio :node="node" />
+    </block>
+
     <!--img类型-->
     <block v-else-if="node.tag == 'img'">
       <wx-parse-img :node="node" />
@@ -70,6 +75,7 @@
 import wxParseTemplate from './wxParseTemplate1';
 import wxParseImg from './wxParseImg';
 import wxParseVideo from './wxParseVideo';
+import wxParseAudio from './wxParseAudio';
 
 export default {
   name: 'wxParseTemplate0',
@@ -80,6 +86,7 @@ export default {
     wxParseTemplate,
     wxParseImg,
     wxParseVideo,
+    wxParseAudio,
   },
   methods: {
     wxParseATap(e) {
