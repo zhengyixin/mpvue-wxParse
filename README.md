@@ -25,7 +25,7 @@
 
 ### 自定义 parser 函数具体介绍
 
-* 传入的参数为当前节点的 `node` 对象及解析结过 `results` 对象，例如 `startHandler(node, results)`
+* 传入的参数为当前节点 `node` 对象及解析结果 `results` 对象，例如 `startHandler(node, results)`
 * 无需返回值，通过对传入的参数直接操作来完成需要的改动
 * 自定义函数会在原解析函数处理之后执行
 
