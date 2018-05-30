@@ -140,8 +140,6 @@ function html2json(html, customHandler, imageProp, host) {
       if (node.tagType === 'inline') {
         node.classStr += ' inline';
       }
-      node.attr.class = null;
-      node.attr.style = null;
 
       // 对img添加额外数据
       if (node.tag === 'img') {
@@ -191,7 +189,7 @@ function html2json(html, customHandler, imageProp, host) {
       }
 
       if (customHandler.start) {
-        customHandler.start(node);
+        customHandler.start(node, results);
       }
 
       if (unary) {
@@ -221,7 +219,7 @@ function html2json(html, customHandler, imageProp, host) {
       }
 
       if (customHandler.end) {
-        customHandler.end(node);
+        customHandler.end(node, results);
       }
 
       if (bufArray.length === 0) {
@@ -243,7 +241,7 @@ function html2json(html, customHandler, imageProp, host) {
       };
 
       if (customHandler.chars) {
-        customHandler.chars(node);
+        customHandler.chars(node, results);
       }
 
       if (bufArray.length === 0) {

@@ -17,15 +17,15 @@
 | className        | String         | —             | 自定义 class 名称  |
 | content          | String         | —             | 渲染内容           |
 | noData           | String         | 数据不能为空   | 空数据时的渲染展示  |
-| startHandler     | Function       | null          | 自定义 parser 函数 |
+| startHandler     | Function       | 见源码         | 自定义 parser 函数 |
 | endHandler       | Function       | null          | 自定义 parser 函数 |
 | charsHandler     | Function       | null          | 自定义 parser 函数 |
 | imageProp        | Object         | 见下文        | 图片相关参数        |
 
 ### 自定义 parser 函数具体介绍
 
-* 传入的参数为当前节点的 `node` 对象
-* 无需返回值，通过对 `node` 对象直接操作来完成需要的改动
+* 传入的参数为当前节点的 `node` 对象及解析结过 `results` 对象，例如 `startHandler(node, results)`
+* 无需返回值，通过对传入的参数直接操作来完成需要的改动
 * 自定义函数会在原解析函数处理之后执行
 
 ### imageProp 对象具体属性

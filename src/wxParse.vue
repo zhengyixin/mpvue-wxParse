@@ -36,7 +36,10 @@ export default {
     },
     startHandler: {
       type: Function,
-      default: null,
+      default: (node) => {
+        node.attr.class = null;
+        node.attr.style = null;
+      },
     },
     endHandler: {
       type: Function,
