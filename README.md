@@ -38,10 +38,10 @@
 
 ## 事件
 
-| 名称             | 参数            | 描述              |
-| -----------------|--------------- | ----------------  |
-| preview          | 图片地址        | 预览图片时触发     |
-| navigate         | 链接地址        | 点击链接时触发     |
+| 名称             | 参数              | 描述              |
+| -----------------|----------------- | ----------------  |
+| preview          | 图片地址，原始事件 | 预览图片时触发     |
+| navigate         | 链接地址，原始事件 | 点击链接时触发     |
 
 ## 基本使用方法
 
@@ -56,7 +56,7 @@ npm i mpvue-wxparse
 ``` vue
 <template>
   <div>
-    <wxParse :content="article" />
+    <wxParse :content="article" @preview="preview" @navigate="navigate" />
   </div>
 </template>
 
@@ -70,6 +70,14 @@ export default {
   data () {
     return {
       article: '<div>我是HTML代码</div>'
+    }
+  },
+  methods: {
+    preview(src, e) {
+      // do something
+    },
+    navigate(href, e) {
+      // do something
     }
   }
 }
@@ -118,10 +126,7 @@ export default {
 // webpack.base.conf.js
 {
   test: /\.js$/,
-  include: [
-    resolve('src'),
-    resolve('node_modules/mpvue-wxparse')
-  ],
+  include: [resolve('src'), /mpvue-wxparse/],
   use: [
     'babel-loader',
     {
