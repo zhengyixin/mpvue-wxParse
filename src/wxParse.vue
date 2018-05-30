@@ -8,7 +8,7 @@
 
 <template>
 <!--基础元素-->
-<div class="wxParse" :class="className">
+<div class="wxParse" :class="className" v-if="!loading">
   <block v-for="node of nodes" :key="node.index">
     <wxParseTemplate :node="node" />
   </block>
@@ -22,6 +22,10 @@ import wxParseTemplate from './components/wxParseTemplate0';
 export default {
   name: 'wxParse',
   props: {
+    loading: {
+      type: Boolean,
+      default: false,
+    },
     className: {
       type: String,
       default: '',

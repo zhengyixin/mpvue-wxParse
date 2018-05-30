@@ -14,6 +14,7 @@
 
 | 名称              | 类型           | 默认值        | 描述               |
 | -----------------|--------------- | ------------- | ----------------  |
+| loading          | Boolean        | false         | 数据加载状态       |
 | className        | String         | —             | 自定义 class 名称  |
 | content          | String         | —             | 渲染内容           |
 | noData           | String         | 数据不能为空   | 空数据时的渲染展示  |
