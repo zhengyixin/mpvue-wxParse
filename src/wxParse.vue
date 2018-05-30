@@ -17,7 +17,6 @@
 
 <script>
 import HtmlToJson from './libs/html2json';
-import bus from './utils/bus';
 import wxParseTemplate from './components/wxParseTemplate0';
 
 export default {
@@ -82,30 +81,22 @@ export default {
         end: endHandler,
         chars: charsHandler,
       };
-      const { nodes, imageUrls } = HtmlToJson(parseData, customHandler, imageProp);
-      this.imageUrls = imageUrls.map(url => url);
-      return nodes;
+      const results = HtmlToJson(parseData, customHandler, imageProp, this);
+      this.imageUrls = results.imageUrls;
+      return results.nodes;
     },
-  },
-  mounted() {
-    this.initEvents();
   },
   methods: {
-    initEvents() {
-      bus.$on('navigate', this.navigate);
-      bus.$on('preview', this.preview);
-      bus.$on('nopreview', this.removeImageUrl);
+    navigate(href, $event) {
+      this.$emit('navigate', href, $event);
     },
-    navigate(href) {
-      this.$emit('navigate', href);
-    },
-    preview(src) {
+    preview(src, $event) {
       if (!this.imageUrls.length) return;
       wx.previewImage({
         current: src,
         urls: this.imageUrls,
       });
-      this.$emit('preview', src);
+      this.$emit('preview', src, $event);
     },
     removeImageUrl(src) {
       const { imageUrls } = this;

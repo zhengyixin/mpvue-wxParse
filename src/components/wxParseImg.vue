@@ -12,8 +12,6 @@
 </template>
 
 <script>
-import bus from '../utils/bus';
-
 export default {
   name: 'wxParseImg',
   data() {
@@ -35,7 +33,7 @@ export default {
       if (!this.preview) return;
       const { src } = e.target.dataset;
       if (!src) return;
-      bus.$emit('preview', src);
+      this.node.$host.preview(src, e);
     },
     // 图片视觉宽高计算函数区
     wxParseImgLoad(e) {
@@ -52,12 +50,12 @@ export default {
     wxAutoImageCal(originalWidth, originalHeight) {
       // 获取图片的原始长宽
       const { padding } = this.node.attr;
-      const windowWidth = this.node.screen.width - (2 * padding);
+      const windowWidth = this.node.$screen.width - (2 * padding);
       const results = {};
 
       if (originalWidth < 60 || originalHeight < 60) {
         const { src } = this.node.attr;
-        bus.$emit('nopreview', src);
+        this.node.$host.removeImageUrl(src);
         this.preview = false;
       }
 

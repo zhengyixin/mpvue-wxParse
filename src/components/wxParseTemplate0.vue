@@ -67,7 +67,6 @@
 </template>
 
 <script>
-import bus from '../utils/bus';
 import wxParseTemplate from './wxParseTemplate1';
 import wxParseImg from './wxParseImg';
 import wxParseVideo from './wxParseVideo';
@@ -86,7 +85,7 @@ export default {
     wxParseATap(e) {
       const { href } = e.target.dataset;
       if (!href) return;
-      bus.$emit('navigate', href);
+      this.node.$host.navigate(href, e);
     },
   },
 };

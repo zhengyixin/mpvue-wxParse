@@ -59,13 +59,11 @@ function getScreenInfo() {
   return screen;
 }
 
-function html2json(html, customHandler, imageProp) {
+function html2json(html, customHandler, imageProp, host) {
   // 处理字符串
   html = removeDOCTYPE(html);
   html = trimHtml(html);
   html = wxDiscode.strDiscode(html);
-  // 获取屏幕信息
-  const screen = getScreenInfo();
   // 生成node节点
   const bufArray = [];
   const results = {
@@ -73,13 +71,17 @@ function html2json(html, customHandler, imageProp) {
     imageUrls: [],
   };
 
+  function Node(tag) {
+    this.node = 'element';
+    this.tag = tag;
+  }
+  Node.prototype.$screen = getScreenInfo();
+  Node.prototype.$host = host;
+
   HTMLParser(html, {
     start(tag, attrs, unary) {
       // node for this element
-      const node = {
-        node: 'element',
-        tag,
-      };
+      const node = new Node(tag);
 
       if (bufArray.length !== 0) {
         const parent = bufArray[0];
@@ -148,8 +150,6 @@ function html2json(html, customHandler, imageProp) {
         Object.assign(node.attr, imageProp, {
           src: imgUrl || '',
         });
-        node.imgIndex = results.imageUrls.length;
-        node.screen = screen;
         if (imgUrl) {
           results.imageUrls.push(imgUrl);
         }
