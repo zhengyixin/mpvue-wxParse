@@ -62,6 +62,7 @@ export default {
           mode: 'aspectFit',
           padding: 0,
           lazyLoad: false,
+          domain: '',
         };
       },
     },

@@ -15,8 +15,6 @@
 import wxDiscode from './wxDiscode';
 import HTMLParser from './htmlparser';
 
-const placeImgeUrlHttps = 'https';
-
 function makeMap(str) {
   const obj = {};
   const items = str.split(',');
@@ -144,7 +142,7 @@ function html2json(html, customHandler, imageProp, host) {
       // 对img添加额外数据
       if (node.tag === 'img') {
         let imgUrl = node.attr.src;
-        imgUrl = wxDiscode.urlToHttpUrl(imgUrl, placeImgeUrlHttps);
+        imgUrl = wxDiscode.urlToHttpUrl(imgUrl, imageProp.domain);
         Object.assign(node.attr, imageProp, {
           src: imgUrl || '',
         });

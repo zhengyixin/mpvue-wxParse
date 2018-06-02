@@ -179,11 +179,12 @@ function strDiscode(str) {
   str = strOtherDiscode(str);
   return str;
 }
-function urlToHttpUrl(url, rep) {
-  const patt1 = new RegExp('^//');
-  const result = patt1.test(url);
-  if (result) {
-    url = `${rep}:${url}`;
+
+function urlToHttpUrl(url, domain) {
+  if (/^\/\//.test(url)) {
+    return `https:${url}`;
+  } else if (/^\//.test(url)) {
+    return `https://${domain}${url}`;
   }
   return url;
 }

@@ -36,6 +36,7 @@
 | mode             | String         | 'aspectFit'   | 图片裁剪、缩放的模式 |
 | padding          | Number         | 0             | 图片内边距          |
 | lazyLoad         | Boolean        | false         | 图片懒加载          |
+| domain           | String         | ''            | 图片服务域名        |
 
 ## 事件
 
