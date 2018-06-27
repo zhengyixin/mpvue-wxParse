@@ -120,6 +120,8 @@ export default {
 
 * v0.6 之后的版本样式文件需自行引入
 
+* 对性能要求较高的话，推荐使用这个原生组件版 [wxParser-plugin](https://github.com/ifanrx/wxParser-plugin)
+
 * 打包时出错 `ERROR in static/js/vendor.js from UglifyJs`
 
 参照以下配置使 babel 处理 mpvue-wxparse，或更新 UglifyJs 插件
