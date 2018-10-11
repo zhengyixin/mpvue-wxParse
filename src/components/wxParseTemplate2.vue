@@ -81,7 +81,7 @@ export default {
   },
   methods: {
     wxParseATap(e) {
-      const { href } = e.target.dataset;
+      const { href } = e.currentTarget.dataset;
       if (!href) return;
       this.node.$host.navigate(href, e);
     },
