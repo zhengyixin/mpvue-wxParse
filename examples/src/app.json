@@ -1,0 +1,49 @@
+{
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "mpvue-wxParse 示例",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "position": "top",
+    "list": [
+      {
+        "pagePath": "pages/index",
+        "text": "介绍"
+      },
+      {
+        "pagePath": "pages/zhihu",
+        "text": "知乎日报"
+      },
+      {
+        "pagePath": "pages/complex",
+        "text": "复杂示例"
+      },
+      {
+        "pagePath": "pages/test",
+        "text": "测试"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "path": "/pages/index",
+      "config": {
+        "enablePullDownRefresh": true
+      }
+    }, {
+      "path": "/pages/zhihu",
+      "config": {
+        "enablePullDownRefresh": true
+      }
+    }, {
+      "path": "/pages/complex",
+      "config": {
+        "enablePullDownRefresh": true
+      }
+    }, {
+      "path": "/pages/test"
+    }
+  ]
+}
