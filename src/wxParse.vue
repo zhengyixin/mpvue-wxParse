@@ -61,6 +61,7 @@ export default {
         return {
           mode: 'aspectFit',
           padding: 0,
+          webPadding: 0,
           lazyLoad: false,
           domain: '',
         };

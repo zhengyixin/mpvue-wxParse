@@ -50,8 +50,8 @@ export default {
     // 计算视觉优先的图片宽高
     wxAutoImageCal(originalWidth, originalHeight) {
       // 获取图片的原始长宽
-      const { padding } = this.node.attr;
-      const windowWidth = this.node.$screen.width - (2 * padding);
+      const { webPadding, padding } = this.node.attr;
+      const windowWidth = this.node.$screen.width - 2 * webPadding - 2 * padding;
       const results = {};
 
       if (originalWidth < 60 || originalHeight < 60) {
