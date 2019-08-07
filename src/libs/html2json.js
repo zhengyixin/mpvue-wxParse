@@ -48,7 +48,7 @@ function trimHtml(html) {
 
 function getScreenInfo() {
   const screen = {};
-  wx.getSystemInfo({
+  swan.getSystemInfo({
     success: (res) => {
       screen.width = res.windowWidth;
       screen.height = res.windowHeight;

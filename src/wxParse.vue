@@ -103,7 +103,7 @@ export default {
     },
     preview(src, $event) {
       if (!this.imageUrls.length) return;
-      wx.previewImage({
+      swan.previewImage({
         current: src,
         urls: this.imageUrls,
       });
